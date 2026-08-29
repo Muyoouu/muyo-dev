@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+)
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+---
+
+<BaseLayout
+  title="Writing — Musa Yohanes"
+  description="Articles by Musa Yohanes on data analysis, automation, and engineering — published on Medium."
+>
+  <Header />
+  <main class="flex-1">
+    <section>
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+          Writing
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          Articles on data analysis, automation, and engineering.
+        </p>
+        <ul class="mt-12 divide-y divide-border border-y border-border">
+          {
+            posts.map((post) => (
+              <li>
+                <a
+                  href={post.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group block px-2 py-6 transition-colors duration-200 hover:bg-muted sm:px-4"
+                >
+                  <div class="flex flex-wrap items-baseline justify-between gap-2">
+                    <h2 class="text-lg font-semibold text-foreground transition-colors duration-200 group-hover:text-accent">
+                      {post.data.title}
+                    </h2>
+                    <time
+                      datetime={post.data.pubDate.toISOString()}
+                      class="text-sm text-muted-foreground"
+                    >
+                      {formatDate(post.data.pubDate)}
+                    </time>
+                  </div>
+                  <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                    {post.data.description}
+                  </p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-8 text-sm text-muted-foreground">
+          Full articles on
+          <a
+            href="https://medium.com/@musayohanes00"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-accent transition-colors duration-200 hover:underline"
+          >
+            Medium
+          </a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

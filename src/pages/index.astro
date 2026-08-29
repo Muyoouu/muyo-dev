@@ -1,0 +1,197 @@
+---
+import { getCollection } from 'astro:content'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import { profile } from '../data/profile'
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const featuredProjects = (await getCollection('projects'))
+  .filter((project) => project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3)
+
+const { name, role, tagline, summary, skills, experience, socials } = profile
+---
+
+<BaseLayout title={profile.site.title} description={profile.site.description}>
+  <Header />
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="border-b border-border">
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <p class="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+          {tagline}
+        </p>
+        <h1 class="mt-6 text-5xl font-bold tracking-tight text-foreground md:text-7xl">
+          {name}
+        </h1>
+        <p class="mt-4 text-xl font-medium text-accent md:text-2xl">{role}</p>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          {summary}
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a
+            href="/portfolio"
+            class="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:opacity-90"
+          >
+            View work
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+          <a
+            href={`mailto:${socials.email}`}
+            class="inline-flex items-center gap-2 border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
+          >
+            Get in touch
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="border-b border-border">
+      <div class="mx-auto max-w-6xl px-6 py-16">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+          Skills
+        </h2>
+        <ul class="mt-6 flex flex-wrap gap-3">
+          {
+            skills.map((skill) => (
+              <li class="border border-border px-3 py-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:border-accent hover:text-accent">
+                {skill}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- Featured projects -->
+    <section class="border-b border-border">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <div class="flex items-baseline justify-between">
+          <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+            Featured projects
+          </h2>
+          <a
+            href="/portfolio"
+            class="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-accent"
+          >
+            All projects →
+          </a>
+        </div>
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {
+            featuredProjects.map((project) => (
+              <a
+                href={project.data.url ?? "/portfolio"}
+                target={project.data.url ? "_blank" : undefined}
+                rel={project.data.url ? "noopener noreferrer" : undefined}
+                class="group flex flex-col border border-border bg-card p-6 transition-colors duration-200 hover:border-accent"
+              >
+                <h3 class="text-lg font-semibold text-foreground transition-colors duration-200 group-hover:text-accent">
+                  {project.data.title}
+                </h3>
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {project.data.description}
+                </p>
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {project.data.tags.map((tag) => (
+                    <li class="border border-border px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="border-b border-border">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+          Experience
+        </h2>
+        <ol class="mt-10 space-y-10 border-l border-border pl-8">
+          {
+            experience.map((job) => (
+              <li class="relative">
+                <span
+                  class="absolute -left-[37px] top-1.5 h-2.5 w-2.5 border border-accent bg-background"
+                  aria-hidden="true"
+                />
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="text-lg font-semibold text-foreground">
+                    {job.role} · {job.company}
+                  </h3>
+                  <p class="text-sm text-muted-foreground">{job.period}</p>
+                </div>
+                <ul class="mt-3 space-y-1.5">
+                  {job.points.map((point) => (
+                    <li class="text-sm leading-relaxed text-muted-foreground">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section>
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
+        <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+          Get in touch
+        </h2>
+        <p class="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          Open to collaborations and opportunities. Reach out directly or find
+          me on the platforms below.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href={`mailto:${socials.email}`}
+            class="inline-flex items-center bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:opacity-90"
+          >
+            Email me
+          </a>
+          <a
+            href={socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
+          >
+            LinkedIn
+          </a>
+          <a
+            href={socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

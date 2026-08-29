@@ -1,0 +1,156 @@
+---
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import { profile } from '../data/profile'
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const { name, role, location, summary, experience, education, certifications, socials } = profile
+
+const socialLinks = [
+  { href: socials.github, label: 'GitHub' },
+  { href: socials.linkedin, label: 'LinkedIn' },
+  { href: socials.medium, label: 'Medium' },
+  { href: socials.youtube, label: 'YouTube' },
+]
+---
+
+<BaseLayout
+  title="About — Musa Yohanes"
+  description={`About ${name} — ${role} in ${location}. Former PwC auditor and accounting lecturer, now building SaaS and workflow automation.`}
+>
+  <Header />
+  <main class="flex-1">
+    <section class="border-b border-border">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+          About
+        </h1>
+        <div class="mt-10 grid gap-12 md:grid-cols-3">
+          <div class="md:col-span-2">
+            <p class="text-lg leading-relaxed text-foreground">{summary}</p>
+            <p class="mt-6 leading-relaxed text-muted-foreground">
+              Based in {location}, currently working as {role.toLowerCase()}.
+              The path here ran through audit engagements at PwC and accounting
+              classrooms — which is why the systems I build today are designed
+              with the people who actually use them in mind: clear processes,
+              trustworthy data, no surprises.
+            </p>
+          </div>
+          <aside class="space-y-4 text-sm">
+            <div>
+              <h2 class="font-semibold uppercase tracking-widest text-muted-foreground">
+                Location
+              </h2>
+              <p class="mt-2 text-foreground">{location}</p>
+            </div>
+            <div>
+              <h2 class="font-semibold uppercase tracking-widest text-muted-foreground">
+                Currently
+              </h2>
+              <p class="mt-2 text-foreground">
+                {role} at {experience[0].company}
+              </p>
+            </div>
+            <div>
+              <h2 class="font-semibold uppercase tracking-widest text-muted-foreground">
+                Elsewhere
+              </h2>
+              <ul class="mt-2 space-y-1">
+                {
+                  socialLinks.map((social) => (
+                    <li>
+                      <a
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="font-medium text-foreground transition-colors duration-200 hover:text-accent"
+                      >
+                        {social.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="border-b border-border">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+          Experience
+        </h2>
+        <ol class="mt-10 space-y-12 border-l border-border pl-8">
+          {
+            experience.map((job) => (
+              <li class="relative">
+                <span
+                  class="absolute -left-[37px] top-1.5 h-2.5 w-2.5 border border-accent bg-background"
+                  aria-hidden="true"
+                />
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="text-lg font-semibold text-foreground">
+                    {job.role} · {job.company}
+                  </h3>
+                  <p class="text-sm text-muted-foreground">{job.period}</p>
+                </div>
+                {job.location && (
+                  <p class="mt-1 text-sm text-muted-foreground">
+                    {job.location}
+                  </p>
+                )}
+                <ul class="mt-3 space-y-1.5">
+                  {job.points.map((point) => (
+                    <li class="text-sm leading-relaxed text-muted-foreground">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- Education + Certifications -->
+    <section>
+      <div class="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:py-20">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+            Education
+          </h2>
+          <ul class="mt-8 space-y-6">
+            {
+              education.map((edu) => (
+                <li class="border-l-2 border-border pl-4">
+                  <h3 class="font-semibold text-foreground">{edu.school}</h3>
+                  <p class="mt-1 text-sm text-muted-foreground">{edu.degree}</p>
+                  <p class="mt-1 text-sm text-muted-foreground">{edu.period}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+            Certifications
+          </h2>
+          <ul class="mt-8 divide-y divide-border border-y border-border">
+            {
+              certifications.map((cert) => (
+                <li class="py-4 text-sm font-medium text-foreground">
+                  {cert}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
