@@ -1,0 +1,47 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+.pnpm-store/
+
+# cloudflare
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
+# environment variables
+.env
+.env.*
+!.env.example
+
+# testing
+playwright-report/
+test-results/
+coverage/
+
+# ai tooling (skill installed globally in ~/.config/opencode/skills/)
+.opencode/
+.claude/
+
+# personal / pii
+Profile.pdf
+*.export.pdf
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
