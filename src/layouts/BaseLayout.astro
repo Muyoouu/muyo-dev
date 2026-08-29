@@ -1,0 +1,61 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url)
+const siteName = 'Musa Yohanes'
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteName} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script is:inline>
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem("muyo-theme");
+        } catch (e) {
+          stored = null;
+        }
+        var theme = "light";
+        if (stored === "dark" || stored === "light") {
+          theme = stored;
+        } else if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          theme = "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
