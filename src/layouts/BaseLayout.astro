@@ -4,12 +4,42 @@ import '../styles/global.css'
 interface Props {
   title: string
   description: string
+  ogType?: 'website' | 'article'
+  publishedTime?: Date
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[]
 }
 
-const { title, description } = Astro.props
+const { title, description, ogType = 'website', publishedTime, jsonLd } = Astro.props
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url)
+const site = Astro.site ?? new URL('https://muyo.dev')
+const canonicalURL = new URL(Astro.url.pathname, site)
+const ogImageURL = new URL('/og.png', site)
 const siteName = 'Musa Yohanes'
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteName,
+  url: site.toString(),
+  jobTitle: 'Software Developer',
+  description:
+    'Software developer in Jakarta. Builds workflow automation at a SaaS company. Former financial auditor at PwC.',
+  sameAs: [
+    'https://www.linkedin.com/in/musayohanes',
+    'https://github.com/Muyoouu',
+    'https://medium.com/@musayohanes00',
+  ],
+  knowsAbout: [
+    'Python',
+    'React',
+    'TypeScript',
+    'Workflow Automation',
+    'Financial Systems',
+    'Data Analysis',
+  ],
+}
+
+const jsonLdBlocks = [personJsonLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [])]
 ---
 
 <!doctype html>
@@ -22,17 +52,34 @@ const siteName = 'Musa Yohanes'
     <meta name="description" content={description} />
     <meta name="author" content={siteName} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
+    <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
 
-    <meta property="og:type" content="website" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5" />
+
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {jsonLdBlocks.map((block) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
 
     <script is:inline>
       (function () {

@@ -1,0 +1,122 @@
+---
+import { getCollection, render } from 'astro:content'
+import Footer from '../../../components/Footer.astro'
+import Header from '../../../components/Header.astro'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects')
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }))
+}
+
+const { project } = Astro.props
+const { Content } = await render(project)
+
+const { title, description, tags, url, repo, date } = project.data
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description,
+  keywords: tags.join(', '),
+  dateCreated: date.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'Musa Yohanes',
+    url: Astro.site?.toString() ?? 'https://muyo.dev/',
+  },
+  ...(url && { url }),
+  ...(repo && {
+    subjectOf: repo,
+    sameAs: repo,
+  }),
+  mainEntityOfPage: new URL(
+    `/projects/${project.id}/`,
+    Astro.site ?? 'https://muyo.dev',
+  ).toString(),
+}
+---
+
+<BaseLayout title={`${title} — Musa Yohanes`} description={description} jsonLd={jsonLd}>
+  <Header />
+  <main class="flex-1">
+    <article>
+      <div class="mx-auto max-w-3xl px-6 py-16 md:py-20">
+        <p class="text-sm font-medium text-accent">
+          <a href="/portfolio" class="transition-colors duration-200 hover:underline"
+            >← Portfolio</a
+          >
+        </p>
+        <h1 class="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          {title}
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-muted-foreground">{description}</p>
+        <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
+          <time datetime={date.toISOString()}>{formatDate(date)}</time>
+          {
+            repo && (
+              <>
+                <span aria-hidden="true">·</span>
+                <a
+                  href={repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="transition-colors duration-200 hover:text-accent"
+                >
+                  Source on GitHub
+                </a>
+              </>
+            )
+          }
+          {
+            url && (
+              <>
+                <span aria-hidden="true">·</span>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="transition-colors duration-200 hover:text-accent"
+                >
+                  Related article on Medium
+                </a>
+              </>
+            )
+          }
+        </div>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {
+            tags.map((tag) => (
+              <li class="border border-border px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                {tag}
+              </li>
+            ))
+          }
+        </ul>
+        <div
+          class="prose mt-10 max-w-none dark:prose-invert
+            prose-headings:tracking-tight prose-headings:text-foreground
+            prose-p:text-muted-foreground prose-p:leading-relaxed
+            prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-foreground
+            prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
+            prose-pre:border prose-pre:border-border prose-pre:bg-card
+            prose-blockquote:border-accent prose-blockquote:text-muted-foreground
+            prose-img:rounded-none prose-img:border prose-img:border-border
+            prose-hr:border-border"
+        >
+          <Content />
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

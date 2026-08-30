@@ -22,6 +22,7 @@ const writing = defineCollection({
     description: z.string(),
     pubDate: z.coerce.date(),
     url: z.url(),
+    tags: z.array(z.string()).default([]),
   }),
 })
 

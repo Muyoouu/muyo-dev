@@ -28,7 +28,12 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
               <article class="flex flex-col border border-border bg-card p-6 transition-colors duration-200 hover:border-accent">
                 <div class="flex items-start justify-between gap-4">
                   <h2 class="text-lg font-semibold text-foreground">
-                    {project.data.title}
+                    <a
+                      href={`/projects/${project.id}/`}
+                      class="transition-colors duration-200 hover:text-accent"
+                    >
+                      {project.data.title}
+                    </a>
                   </h2>
                   {project.data.url && (
                     <a

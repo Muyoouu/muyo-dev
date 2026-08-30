@@ -35,9 +35,7 @@ const formatDate = (date: Date) =>
             posts.map((post) => (
               <li>
                 <a
-                  href={post.data.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/blog/${post.id}/`}
                   class="group block px-2 py-6 transition-colors duration-200 hover:bg-muted sm:px-4"
                 >
                   <div class="flex flex-wrap items-baseline justify-between gap-2">
