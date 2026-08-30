@@ -8,7 +8,7 @@ Recorded from the built world — ground truth, not intention: `src/layouts/Base
 
 - **Direction:** Component Datasheet — seed `a529239b`, assigned direction, code-led build. The contract comment lives verbatim in `BaseLayout.astro`'s body.
 - **Thesis:** The portfolio printed as the datasheet for a human component: part number, features, absolute maximum ratings, pinout, application notes. It refuses the centered-hero-plus-card dev-portfolio default and every warm cream ground; the light sheet is crisp white.
-- **Story told in seconds:** "I used to audit the books. / Now I write the software that runs them." — home hero, first line ink, second line red (`src/pages/index.astro`). A hiring manager reads the ratings table and the application cards and gets it: ex-PwC auditor, now builds and runs the software.
+- **Story told in seconds:** "I used to check the numbers. / Now I build the systems that move them." — home hero, first line ink, second line red (`src/pages/index.astro`). A hiring manager reads the ratings table and the application cards and gets it: ex-PwC auditor, now builds the data systems finance runs on.
 - **Site:** Musa Yohanes, software developer in Jakarta, ex-PwC auditor (`src/data/profile.ts`, Person JSON-LD in `BaseLayout.astro`).
 
 ## Personality
@@ -77,10 +77,10 @@ One signal-red voice on white stock. No cream, no bone, no gradient anywhere in 
 
 ## Components
 
-- **SpecCard** (`SpecCard.astro`) — the package-flip card, the signature component. Outer `.package` gives `perspective: 1400px`. Front face: `border-2 border-foreground bg-card`, a muted spec bar (`Component` mono-label left, mono date right), title link (red on group hover), 15px description, mono-label bordered tags. Rear face: `absolute inset-0`, `rotateY(180deg)`, `border-2 border-accent`, red SPEC bar with white mono text, `divide-y` dl (ROLE / STACK with tags joined ` · `), footer with filled "Full datasheet" + up to two hairline links (Source/Demo/Article). See Motion for gating.
+- **SpecCard** (`SpecCard.astro`) — the package-flip card, the signature component. Outer `.package` gives `perspective: 1400px`. Front face: `border-2 border-foreground bg-card`, a muted spec bar (`Component` mono-label left, mono date right), title link (red on group hover), 15px description, mono-label bordered tags. Rear face: `absolute inset-0`, `rotateY(180deg)`, `border-2 border-accent`, red SPEC bar with white mono text, `divide-y` dl (ROLE text-right; STACK as right-justified `flex-wrap` mono spans separated by `·`), footer with filled "Full datasheet" + up to two hairline links (Source/Demo/Article). See Motion for gating.
 - **Buttons:** two shapes only, both `mono-label`. Filled — `bg-accent-fill`, white text, hover `accent-fill-hover` (EMAIL cell, SEE THE WORK, Email me, Full datasheet, Back to the cover). Hairline — `border-2 border-foreground`, ink text, hover swaps border/text to red (Read my writing, LinkedIn, GitHub, See the work, rear-face links use 1px `border-border`). All `transition-colors duration-200`.
 - **Tags:** mono-label, 1px `border-border`, `px-2 py-1`, 10px, secondary. No fill.
-- **Ratings table** (home): full `border-collapse`, 1px `border-border` row rules, mono-label header row, mono red right-aligned ratings. Six entries — `3` years finance work, PwC assurance `Done`, `1` SaaS built solo, `3.5M` bike trips analyzed, `1` OAuth2 flow from scratch, `60 days` token cache validity — each traceable to the record (profile.ts, project content). Footnote binds it: "* Every rating above is on the record. No fabrication, no rounding up."
+- **Ratings table** (home): full `border-collapse`, 1px `border-border` row rules, mono-label header row, mono red right-aligned ratings. Six entries — `3` years finance work, PwC assurance `Done`, `1` SaaS product shipped, `3.5M` bike trips analyzed, `1` OAuth2 flow from scratch, `60 days` token cache validity — each traceable to the record (profile.ts, project content). Footnote binds it: "* Every rating above is on the record. No fabrication, no rounding up."
 - **Title-block rows:** TITLE / DRAWN BY / LOCATION / REV cells (home cover; REV `2026·A` in mono red). 404 reuses the row as ERROR / CAUSE / RECOVERY / SEVERITY. Project pages use ROLE / DATE / PRIMARY / LINKS.
 - **Footer** (`Footer.astro`): `border-t-2 border-foreground`; name uppercase + mono line "© year · Jakarta, Indonesia · Doc No. MY-WEB-01 · Status: live" left; five mono-label links (GitHub, LinkedIn, Medium, YouTube, Email) right, secondary → red hover, external `noopener noreferrer`.
 - **ThemeToggle** (`ThemeToggle.tsx`, SolidJS island, `client:load`): 36×36 (`h-9 w-9`) `rounded-none` bordered button, 18px stroke sun/moon icon, `aria-label` + `aria-pressed`, persists `localStorage["muyo-theme"]`. Hover: border + icon red. Inline head script applies stored theme before paint (no flash); default light.
@@ -108,7 +108,7 @@ Two themes, light default, both first-class; toggle persisted (`muyo-theme`), pr
 
 ## Copy voice
 
-Casual first-person throughout, authored pages only: "I used to audit the books. Now I write the software that runs them." / "I wrote the whole OAuth2 flow myself, including the part where Internet Explorer used to live." / "No fabrication, no rounding up." Project frontmatter descriptions are rewritten in the same voice (e.g. nineants-saas, xero-excel-integration, cyclistic-data-analysis). Exempt as user-authored: the writing collection, `src/data/profile.ts` fields, and certification names (which keep their em dashes — "CS50 — Introduction to Computer Science").
+Casual first-person throughout, authored pages only: "I used to check the numbers. Now I build the systems that move them." / "I wrote the whole OAuth2 flow myself, including the part where Internet Explorer used to live." / "No fabrication, no rounding up." The company/product reads as a treasury data platform everywhere (deck, profile.ts, JSON-LD, llms.txt); project frontmatter descriptions are rewritten in the same voice (e.g. treasury-data-platform, xero-excel-integration, cyclistic-data-analysis). The contact section offers help, not a job pitch. Exempt as user-authored: the writing collection, `src/data/profile.ts` fields, and certification names (which keep their em dashes — "CS50 — Introduction to Computer Science").
 
 ## Anti-patterns to avoid
 
@@ -125,7 +125,7 @@ Casual first-person throughout, authored pages only: "I used to audit the books.
 
 ## Provenance
 
-The only shipping rasters are `public/images/projects/ar-dashboard.webp` and `public/images/projects/xero-integration.webp` — both pre-existing, user-supplied screenshots rendered on project detail pages (referenced from `excel-ar-dashboard.md` and `xero-excel-integration.md` frontmatter, drawn with `border-2 border-foreground`). No generated or stock rasters ship. All screenshots under `.impeccable/review/` are review evidence, not shipping assets. Everything else visual is CSS rules, type, and inline SVG icons (hamburger, sun/moon).
+The only shipping rasters are `public/images/projects/ar-dashboard.webp` and `public/images/projects/xero-integration.webp` — both pre-existing, user-supplied screenshots rendered on project detail pages (referenced from `excel-ar-dashboard.md` and `xero-excel-integration.md` frontmatter, drawn with `border-2 border-foreground`). The favicon set (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`) is the site mark: signal-red `#c8102e` square, radius zero, white "M" stroke, restyled from the old Catppuccin blue; the PNG/ICO are rendered from the SVG. No generated or stock rasters ship beyond the icon set. All screenshots under `.impeccable/review/` are review evidence, not shipping assets. Everything else visual is CSS rules, type, and inline SVG icons (hamburger, sun/moon).
 
 ## Dials
 
