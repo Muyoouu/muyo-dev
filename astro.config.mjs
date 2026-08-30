@@ -9,6 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://muyo.dev',
   integrations: [solidJs(), sitemap()],
+  devToolbar: { enabled: false },
 
   vite: {
     plugins: [tailwindcss()]
