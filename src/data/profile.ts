@@ -45,7 +45,7 @@ export const profile: Profile = {
   tagline: 'Software Developer · Former Financial Auditor at PwC',
   location: 'Jakarta, Indonesia',
   summary:
-    'I build software for a SaaS company that automates business workflows. Before this I worked as a financial auditor at PwC and taught accounting, so I know the code side and the finance work it replaces. I build tools people actually want to use.',
+    'I build data platforms for treasury teams at a SaaS company. Before this I worked as a financial auditor at PwC and taught accounting, so I know the code side and the finance work it supports. I build tools people actually want to use.',
   skills: [
     'Python',
     'React',
@@ -56,7 +56,7 @@ export const profile: Profile = {
     'Azure',
     'MongoDB',
     'PostgreSQL',
-    'Workflow Automation',
+    'Data Pipelines',
     'Financial Systems',
     'Data Analytics',
   ],
@@ -67,7 +67,7 @@ export const profile: Profile = {
       period: 'Oct 2024 – Present',
       location: 'Utrecht, Netherlands (remote)',
       points: [
-        'Built the backend, React frontend, and infrastructure for a workflow automation SaaS',
+        'Built the backend, React frontend, and infrastructure for a treasury data platform',
         'Made the early product decisions: data model, service layout, deployment',
         'Handle deploys, monitoring, bugs, and onboarding new users',
       ],
@@ -123,6 +123,6 @@ export const profile: Profile = {
   site: {
     title: 'Musa Yohanes',
     description:
-      'Software developer in Jakarta. I build workflow automation at a SaaS company. Former financial auditor at PwC.',
+      'Software developer in Jakarta. I build data platforms for treasury teams at a SaaS company. Former financial auditor at PwC.',
   },
 }
