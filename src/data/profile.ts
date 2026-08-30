@@ -118,7 +118,7 @@ export const profile: Profile = {
     linkedin: 'https://www.linkedin.com/in/musayohanes',
     medium: 'https://medium.com/@musayohanes00',
     youtube: 'https://www.youtube.com/@DataDrivenDuck',
-    email: 'musayohanes00@gmail.com',
+    email: 'hello@muyo.dev',
   },
   site: {
     title: 'Musa Yohanes',
