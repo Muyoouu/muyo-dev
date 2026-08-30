@@ -5,14 +5,23 @@ tags: ["Excel", "VBA", "Data Modeling"]
 order: 4
 date: 2023-08-01
 repo: https://github.com/Muyoouu/excel-ar-dashboard
+role: "Developer"
+demo: https://www.youtube.com/watch?v=KTbFauEHCGE
+image: https://raw.githubusercontent.com/Muyoouu/excel-ar-dashboard/main/img/overview.jpg
 ---
 
-An Excel dashboard for tracking accounts receivable, built to help businesses monitor the health of what customers owe them. Instead of scattered formulas across sheets, it sits on a real data model where invoices, customers, and payments are structured properly, so aging and outstanding balances stay correct as the data changes.
+## The problem
 
-The dashboard has two pages, an overview and an individual customer analysis, connected through navigation buttons. A dynamic as-of-date acts as the base for every metric calculation, and users can change it through a date picker built with VBA. A focused view hides Excel's built-in interface, giving users a clean dashboard instead of rows and columns.
+Businesses need to keep an eye on what their customers owe them, because accounts receivable health follows cash flow directly. Scattered formulas across sheets make that hard, since aging and outstanding balances drift out of sync as data changes. I had reviewed accounts receivable professionally during my PwC audit days, so I knew which numbers matter, how aging buckets should behave, and where the usual data mistakes hide.
 
-VBA handles the automation side, from report generation to the interactive UI elements. The whole thing is driven by Excel formulas on top of the calculation layer, so the metrics stay live when new data comes in.
+## What I built
 
-Skills from my PwC audit days went straight into this project. Reviewing accounts receivable was literally part of my old job, so I knew which numbers matter, how aging buckets should behave, and where the usual data mistakes hide. That context shaped both the data model and the metrics shown on screen.
+An Excel dashboard that sits on a real data model, where invoices, customers, and payments are structured properly, so metrics stay correct as the data changes. It has two pages, an overview and a per-customer detail view, connected through navigation buttons. The dashboard tracks aging buckets, overdue categories, and credit limit usage, and VBA hides Excel's built-in chrome, giving users a clean dashboard view without rows and columns in the way.
 
-The project is open source, and the full source is available on [GitHub](https://github.com/Muyoouu/excel-ar-dashboard).
+## How it works
+
+A dynamic as-of-date acts as the base for every metric calculation, and users change it through a date picker built with VBA. All charts and key figures update against that date, so the whole dashboard stays consistent with a single choice.
+
+VBA handles the automation side, from report generation to the interactive UI elements. Excel formulas drive the calculation layer on top of the data model, so the numbers stay live when new data comes in.
+
+The project is open source. The full source is on [GitHub](https://github.com/Muyoouu/excel-ar-dashboard), and a [demo video](https://www.youtube.com/watch?v=KTbFauEHCGE) walks through the dashboard.

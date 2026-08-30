@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props
 const { Content } = await render(project)
 
-const { title, description, tags, url, repo, date } = project.data
+const { title, description, tags, role, url, repo, demo, image, date } = project.data
 
 const formatDate = (date: Date) =>
   date.toLocaleDateString('en-US', {
@@ -45,7 +45,12 @@ const jsonLd = {
 }
 ---
 
-<BaseLayout title={`${title} — Musa Yohanes`} description={description} jsonLd={jsonLd}>
+<BaseLayout
+  title={`${title} — Musa Yohanes`}
+  description={description}
+  {...(image && { image })}
+  jsonLd={jsonLd}
+>
   <Header />
   <main class="flex-1">
     <article>
@@ -60,6 +65,8 @@ const jsonLd = {
         </h1>
         <p class="mt-4 text-lg leading-relaxed text-muted-foreground">{description}</p>
         <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
+          {role && <span class="font-medium text-foreground">{role}</span>}
+          {role && <span aria-hidden="true">·</span>}
           <time datetime={date.toISOString()}>{formatDate(date)}</time>
           {
             repo && (
@@ -72,6 +79,21 @@ const jsonLd = {
                   class="transition-colors duration-200 hover:text-accent"
                 >
                   Source on GitHub
+                </a>
+              </>
+            )
+          }
+          {
+            demo && (
+              <>
+                <span aria-hidden="true">·</span>
+                <a
+                  href={demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="transition-colors duration-200 hover:text-accent"
+                >
+                  View demo
                 </a>
               </>
             )
@@ -101,6 +123,18 @@ const jsonLd = {
             ))
           }
         </ul>
+        {
+          image && (
+            <img
+              src={image}
+              alt={`Screenshot of ${title}`}
+              loading="lazy"
+              class="mt-8 w-full border border-border"
+              width="1200"
+              height="630"
+            />
+          )
+        }
         <div
           class="prose mt-10 max-w-none dark:prose-invert
             prose-headings:tracking-tight prose-headings:text-foreground
