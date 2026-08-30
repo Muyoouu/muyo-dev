@@ -42,7 +42,7 @@ He has sat on both sides of the systems he builds: he audited the financial work
 ## Brand Commitments
 
 - Personality direction from the owner: simple, pleasing, pastel, minimalist, but "too ordinary, no personality" today. He asked for surprise and personality within that calm base.
-- Incumbent reference: `design-system/musa-yohanes-portfolio/MASTER.md` (Swiss Minimal × Catppuccin). The calm, pastel, grid-based soul is liked; the ordinary execution is not binding. Visual world decisions live in DESIGN.md / new-work, not here.
+- Visual world decisions live in DESIGN.md / new-work, not here. The old design-system/ directory (Swiss Minimal × Catppuccin) was removed with the datasheet redesign.
 - Name to keep: Musa Yohanes. Existing favicon/OG assets in `public/`.
 
 ## Evidence on Hand
