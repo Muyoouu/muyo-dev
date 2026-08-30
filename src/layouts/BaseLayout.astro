@@ -13,7 +13,7 @@ const siteName = 'Musa Yohanes'
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,14 +42,9 @@ const siteName = 'Musa Yohanes'
         } catch (e) {
           stored = null;
         }
-        var theme = "light";
+        var theme = "dark";
         if (stored === "dark" || stored === "light") {
           theme = stored;
-        } else if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        ) {
-          theme = "dark";
         }
         document.documentElement.setAttribute("data-theme", theme);
       })();
