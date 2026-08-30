@@ -5,4 +5,4 @@ pubDate: 2023-10-27
 url: https://medium.com/@musayohanes00/data-cleaning-with-sql-googles-capstone-project-712420fbd1ad
 ---
 
-A step-by-step SQL walkthrough for cleaning messy real-world data — deduplication, standardization, and validation — using Google's Capstone dataset.
+A step-by-step SQL walkthrough for cleaning messy real-world data, covering deduplication, standardization, and validation with Google's Capstone dataset.

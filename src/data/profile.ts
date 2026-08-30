@@ -42,10 +42,10 @@ export interface Profile {
 export const profile: Profile = {
   name: 'Musa Yohanes',
   role: 'Software Developer',
-  tagline: 'Software Developer | Data | Finance | Process Automation',
+  tagline: 'Software Developer · ex-PwC',
   location: 'Jakarta, Indonesia',
   summary:
-    'Software developer building SaaS workflow automation, with a unique background as a former PwC auditor and accounting lecturer. That experience means I build systems that make sense both technically and business-wise — I speak the language of finance teams as fluently as the language of code.',
+    'I build software for a SaaS company that automates business workflows. Before this I was a PwC auditor and taught accounting, so I know the code side and the finance work it replaces. I build tools people actually want to use.',
   skills: [
     'Python',
     'React',
@@ -67,31 +67,31 @@ export const profile: Profile = {
       period: 'Oct 2024 – Present',
       location: 'Utrecht, Netherlands (remote)',
       points: [
-        'Architect and build SaaS platform end-to-end: backend APIs, React frontend, infrastructure',
-        'Built entire product architecture from ground up',
-        'Own deployment, monitoring, production issues, and user onboarding',
+        'Built the backend, React frontend, and infrastructure for a workflow automation SaaS',
+        'Made the early product decisions: data model, service layout, deployment',
+        'Handle deploys, monitoring, bugs, and onboarding new users',
       ],
     },
     {
       company: 'Upwork',
       role: 'SME Accounting & Bookkeeping | Data Analytics',
       period: 'Nov 2023 – Sep 2024',
-      points: ['Freelance accounting automation and data analytics for SMBs'],
+      points: ['Freelance bookkeeping and data work for small businesses'],
     },
     {
       company: 'PwC Indonesia',
       role: 'Assurance Associate',
       period: 'Aug 2021 – Sep 2022',
       points: [
-        'Audited financial statements for financial services industry',
-        'Verified transactions, identified key business and bookkeeping risks',
+        'Audited financial statements, mostly financial services companies',
+        'Checked transactions against evidence and flagged risky bookkeeping',
       ],
     },
     {
       company: 'Universitas Tarumanagara',
       role: 'Accounting Practical Class Lecturer',
       period: 'Jan 2020 – Dec 2020',
-      points: ['Taught management accounting and cost accounting practice classes'],
+      points: ['Taught cost and management accounting practice classes'],
     },
   ],
   certifications: [
@@ -123,6 +123,6 @@ export const profile: Profile = {
   site: {
     title: 'Musa Yohanes',
     description:
-      'Software developer portfolio — SaaS, workflow automation, data, and finance systems. ex-PwC.',
+      'Software developer in Jakarta. I build workflow automation at a SaaS company. Used to audit finances at PwC.',
   },
 }

@@ -16,7 +16,7 @@ const socialLinks = [
 
 <BaseLayout
   title="About — Musa Yohanes"
-  description={`About ${name} — ${role} in ${location}. Former PwC auditor and accounting lecturer, now building SaaS and workflow automation.`}
+  description={`About ${name}, ${role.toLowerCase()} in ${location}. Former PwC auditor and accounting lecturer, now building SaaS and workflow automation.`}
 >
   <Header />
   <main class="flex-1">
@@ -29,11 +29,10 @@ const socialLinks = [
           <div class="md:col-span-2">
             <p class="text-lg leading-relaxed text-foreground">{summary}</p>
             <p class="mt-6 leading-relaxed text-muted-foreground">
-              Based in {location}, currently working as {role.toLowerCase()}.
-              The path here ran through audit engagements at PwC and accounting
-              classrooms — which is why the systems I build today are designed
-              with the people who actually use them in mind: clear processes,
-              trustworthy data, no surprises.
+              I'm in {location}, working remote for a Dutch SaaS company. I got
+              here through PwC audit rooms and accounting classrooms. That's
+              why the tools I build come with clear process and numbers you can
+              trust.
             </p>
           </div>
           <aside class="space-y-4 text-sm">
