@@ -7,8 +7,8 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     tags: z.array(z.string()),
-    url: z.string().url().optional(),
-    repo: z.string().url().optional(),
+    url: z.url().optional(),
+    repo: z.url().optional(),
     featured: z.boolean().default(false),
     order: z.number(),
     date: z.coerce.date(),
@@ -21,7 +21,7 @@ const writing = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    url: z.string().url(),
+    url: z.url(),
   }),
 })
 

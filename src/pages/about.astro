@@ -48,7 +48,7 @@ const socialLinks = [
                 Currently
               </h2>
               <p class="mt-2 text-foreground">
-                {role} at {experience[0].company}
+                {role} at {experience.at(0)?.company ?? "Automation Boutique"}
               </p>
             </div>
             <div>

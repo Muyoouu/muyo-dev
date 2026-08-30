@@ -13,7 +13,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "check": "astro check",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "astro build && wrangler deploy",
+    "check:ts": "tsgo --noEmit"
   },
   "dependencies": {
     "@astrojs/solid-js": "7.0.2",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@biomejs/biome": "2.5.11",
+    "@typescript/native-preview": "7.0.0-dev.20260707.2",
     "typescript": "6.0.3",
     "wrangler": "4.127.1"
   }
