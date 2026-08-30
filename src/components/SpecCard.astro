@@ -60,9 +60,14 @@ const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'sh
           <dd class="text-right font-medium text-foreground">{role ?? 'Developer'}</dd>
         </div>
         <div class="flex items-baseline justify-between gap-4 py-3">
-          <dt class="mono-label text-secondary">Stack</dt>
-          <dd class="text-right font-mono text-[13px] leading-snug text-foreground">
-            {tags.join(' · ')}
+          <dt class="mono-label shrink-0 text-secondary">Stack</dt>
+          <dd class="flex flex-wrap items-baseline justify-end gap-x-1.5 gap-y-1 font-mono text-[13px] leading-snug text-foreground">
+            {tags.map((tag, i) => (
+              <>
+                <span>{tag}</span>
+                {i < tags.length - 1 && <span class="text-secondary">&middot;</span>}
+              </>
+            ))}
           </dd>
         </div>
       </dl>
