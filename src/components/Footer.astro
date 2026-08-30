@@ -25,24 +25,27 @@ const socials = [
 ]
 ---
 
-<footer class="border-t border-border bg-background">
+<footer class="border-t-2 border-foreground">
   <div
-    class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row"
+    class="mx-auto flex max-w-[1240px] flex-col justify-between gap-6 px-6 py-10 sm:flex-row sm:items-end"
   >
-    <p class="text-sm text-muted-foreground">
-      © {year} Musa Yohanes
-    </p>
+    <div>
+      <p class="text-[15px] font-semibold uppercase tracking-tight text-foreground">Musa Yohanes</p>
+      <p class="mt-1.5 font-mono text-xs text-secondary">
+        &copy; {year} &middot; Jakarta, Indonesia &middot; Doc No. MY-WEB-01 &middot; Status: live
+      </p>
+    </div>
 
     <nav aria-label="Social links">
-      <ul class="flex items-center gap-5">
+      <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
         {
           socials.map((social) => (
             <li>
               <a
                 href={social.href}
-                target={social.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel={social.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                class="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-accent"
+                target={social.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                class="mono-label text-secondary transition-colors duration-200 hover:text-accent"
               >
                 {social.label}
               </a>

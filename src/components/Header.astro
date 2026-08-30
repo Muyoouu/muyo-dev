@@ -2,10 +2,9 @@
 import ThemeToggle from '../islands/ThemeToggle'
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/portfolio', label: 'Work', index: '01' },
+  { href: '/blog', label: 'Writing', index: '02' },
+  { href: '/about', label: 'About', index: '03' },
 ]
 
 const currentPath = Astro.url.pathname
@@ -14,43 +13,130 @@ const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href)
 ---
 
-<header
-  class="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm transition-colors duration-250"
->
-  <div
-    class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6"
-  >
+<header class="sticky top-0 z-50 border-b-2 border-foreground bg-background">
+  <div class="mx-auto flex h-16 max-w-[1240px] items-stretch justify-between gap-6 px-6">
     <a
       href="/"
-      class="font-mono text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent"
+      class="group flex flex-col justify-center transition-colors duration-200"
+      aria-label="Musa Yohanes, home"
     >
-      my<span class="text-accent">.</span>
+      <span class="text-[17px] font-semibold uppercase leading-tight tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+        Musa Yohanes
+      </span>
+      <span class="mono-label text-secondary">Part No. MY&#8209;JKT&#8209;01</span>
     </a>
 
-    <nav aria-label="Main navigation">
-      <ul class="flex items-center gap-6">
+    <nav aria-label="Main navigation" class="hidden md:block">
+      <ul class="flex h-full items-stretch">
         {
           links.map((link) => (
-            <li>
+            <li class="flex border-l border-border last:border-r">
               <a
                 href={link.href}
-                aria-current={isActive(link.href) ? "page" : undefined}
+                aria-current={isActive(link.href) ? 'page' : undefined}
                 class:list={[
-                  "text-sm font-medium transition-colors duration-200 hover:text-accent",
+                  'mono-label flex items-center px-5 transition-colors duration-200',
                   isActive(link.href)
-                    ? "text-foreground underline underline-offset-4"
-                    : "text-muted-foreground",
+                    ? 'bg-muted text-accent'
+                    : 'text-secondary hover:bg-muted hover:text-foreground',
                 ]}
               >
+                <span class="mr-2 text-[0.625rem] opacity-60">{link.index}</span>
                 {link.label}
               </a>
             </li>
           ))
         }
-        <li class="ml-2 border-l border-border pl-4">
-          <ThemeToggle client:load />
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <ThemeToggle client:load />
+      <a
+        href="mailto:musayohanes00@gmail.com"
+        class="mono-label hidden items-center bg-accent-fill px-5 py-2.5 text-white transition-colors duration-200 hover:bg-accent-fill-hover md:flex"
+      >
+        Email
+      </a>
+      <button
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center border border-border text-foreground transition-colors duration-200 hover:border-accent hover:text-accent md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-button
+      >
+        <span class="sr-only">Open menu</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-border bg-background md:hidden" data-menu-panel>
+    <nav aria-label="Mobile navigation">
+      <ul class="divide-y divide-border px-6">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                class:list={[
+                  'mono-label block py-4',
+                  isActive(link.href) ? 'text-accent' : 'text-secondary',
+                ]}
+              >
+                <span class="mr-2 opacity-60">{link.index}</span>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href="mailto:musayohanes00@gmail.com"
+            class="mono-label block py-4 text-accent"
+          >
+            Email
+          </a>
         </li>
       </ul>
     </nav>
   </div>
 </header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-menu-button]')
+  const panel = document.querySelector<HTMLElement>('[data-menu-panel]')
+
+  if (button && panel) {
+    const setOpen = (open: boolean) => {
+      panel.classList.toggle('hidden', !open)
+      button.setAttribute('aria-expanded', String(open))
+      button.querySelector('.sr-only')!.textContent = open ? 'Close menu' : 'Open menu'
+    }
+    button.addEventListener('click', () => {
+      setOpen(panel.classList.contains('hidden'))
+    })
+    panel.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false)
+    })
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.classList.contains('hidden')) {
+        setOpen(false)
+        button.focus()
+      }
+    })
+  }
+</script>

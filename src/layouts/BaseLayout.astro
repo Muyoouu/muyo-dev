@@ -44,7 +44,7 @@ const jsonLdBlocks = [personJsonLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,8 +60,8 @@ const jsonLdBlocks = [personJsonLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd
     <link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
     <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
 
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1418" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
@@ -91,15 +91,87 @@ const jsonLdBlocks = [personJsonLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd
         } catch (e) {
           stored = null;
         }
-        var theme = "dark";
+        var theme = "light";
         if (stored === "dark" || stored === "light") {
           theme = stored;
         }
         document.documentElement.setAttribute("data-theme", theme);
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduced) {
+          document.documentElement.classList.add("js-reveal");
+        }
       })();
     </script>
   </head>
   <body>
+    <!--
+      DIRECTION CONTRACT — Component Datasheet (seed a529239b, assigned direction, code-led)
+      THESIS: The portfolio printed as the datasheet for a human component: part number, features,
+      absolute maximum ratings, pinout, application notes. It refuses the centered-hero-plus-card
+      dev-portfolio default and every warm cream ground; the light sheet is crisp white.
+      OWN-WORLD: white #ffffff stock, cool ink #14171c, signal red #c8102e as the single accent,
+      hairlines #cdd3db, table shade #f2f4f7, secondary #545e6b. Barlow 400-600 for type, JetBrains
+      Mono for part numbers, dates, figures, and uppercase labels. Radius zero everywhere; 2px
+      drawing frames and 1px table rules carry the depth; no soft shadows.
+      STORY: A hiring manager reads the rating table and the application cards and gets it in
+      seconds: this person audited the books at PwC, now builds and runs the software. They flip a
+      package or make contact.
+      FIRST VIEWPORT: A sticky title-block header (name and part number left, nav cells divided by
+      rules, filled EMAIL cell right). Beneath, a 2px drawing frame: its top row is the sheet's
+      title block (TITLE / DRAWN BY / LOCATION / REV cells), left column "FEATURES" holds the
+      statement and the filled SEE THE WORK action, right column holds the ABSOLUTE MAXIMUM
+      RATINGS table with real entries only.
+      SIGNATURE INTERACTION: the package flip. Project cards are component packages; on hover or
+      focus the card flips 180 degrees to its rear spec label (role, stack pins, date, links). One
+      decisive motion, gated behind no-reduced-motion; the front always carries the essentials.
+      FORM: component-datasheet, assigned index 7 of the grounded list, seed key a529239b.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the
+      verdict, DESIGN.md, and every shipping raster carrying its provenance.
+    -->
     <slot />
+    <script>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const targets = document.querySelectorAll('[data-reveal]')
+      if (reduced || !('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.setAttribute('data-revealed', ''))
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.setAttribute('data-revealed', '')
+                io.unobserve(entry.target)
+              }
+            }
+          },
+          { threshold: 0.12 },
+        )
+        targets.forEach((el) => io.observe(el))
+      }
+    </script>
+    <style is:global>
+      html.js-reveal [data-reveal] {
+        opacity: 0.001;
+        transform: translateY(20px);
+        transition:
+          opacity 0.7s cubic-bezier(0.165, 0.84, 0.44, 1),
+          transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+      html.js-reveal [data-reveal="flip"] {
+        transform: perspective(1200px) rotateX(-8deg) translateY(20px);
+        transform-origin: center top;
+      }
+      html.js-reveal [data-reveal][data-revealed] {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html.js-reveal [data-reveal] {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
   </body>
 </html>

@@ -1,57 +1,67 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
+@import "@fontsource/barlow/400.css";
+@import "@fontsource/barlow/500.css";
+@import "@fontsource/barlow/600.css";
+@import "@fontsource/barlow/700.css";
+@import "@fontsource-variable/jetbrains-mono";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark ([data-theme="dark"] &);
 
 /*
- * Catppuccin palette — https://github.com/catppuccin/catppuccin
- * Default (root) = Mocha (dark-first). [data-theme="light"] = Latte.
+ * Component Datasheet — seed a529239b, assigned direction (code-led build).
+ * Crisp white stock, cool ink, one signal-red voice. No cream, no bone.
+ * Dark mode is the night bench inverse. Radius zero; rules carry the depth.
  */
 @theme {
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
 
-  --color-background: #1e1e2e; /* mocha base */
-  --color-foreground: #cdd6f4; /* mocha text */
-  --color-primary: #cdd6f4; /* mocha text */
-  --color-secondary: #9399b2; /* mocha overlay2 */
-  --color-muted: #313244; /* mocha surface0 */
-  --color-muted-foreground: #a6adc8; /* mocha subtext0 */
-  --color-border: #45475a; /* mocha surface1 */
-  --color-card: #181825; /* mocha mantle */
-  --color-accent: #89b4fa; /* mocha blue */
-  --color-destructive: #f38ba8; /* mocha red */
-  --color-ring: #b4befe; /* mocha lavender */
-
-  --radius-none: 0px;
-
-  --shadow-minimal: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --color-background: #ffffff;
+  --color-foreground: #14171c;
+  --color-primary: #14171c;
+  --color-secondary: #545e6b;
+  --color-muted: #f2f4f7;
+  --color-muted-foreground: #545e6b;
+  --color-border: #cdd3db;
+  --color-card: #ffffff;
+  --color-accent: #c8102e;
+  --color-accent-deep: #9d0c24;
+  --color-accent-fill: #c8102e;
+  --color-accent-fill-hover: #9d0c24;
+  --color-destructive: #b3261e;
+  --color-ring: #c8102e;
 
   --transition-duration-fast: 200ms;
-  --transition-duration-normal: 250ms;
+  --transition-duration-normal: 300ms;
+  --ease-sheet: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-reveal: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 @layer base {
-  [data-theme="light"] {
-    --color-background: #eff1f5; /* latte base */
-    --color-foreground: #4c4f69; /* latte text */
-    --color-primary: #4c4f69; /* latte text */
-    --color-secondary: #8c8fa1; /* latte overlay0 */
-    --color-muted: #ccd0da; /* latte surface0 */
-    --color-muted-foreground: #6c6f85; /* latte subtext0 */
-    --color-border: #bcc0cc; /* latte surface1 */
-    --color-card: #e6e9ef; /* latte mantle */
-    --color-accent: #1e66f5; /* latte blue */
-    --color-destructive: #d20f39; /* latte red */
-    --color-ring: #7287fd; /* latte lavender */
+  [data-theme="dark"] {
+    --color-background: #0f1418;
+    --color-foreground: #e7ebee;
+    --color-primary: #e7ebee;
+    --color-secondary: #a3adb8;
+    --color-muted: #1b232b;
+    --color-muted-foreground: #a3adb8;
+    --color-border: #2b333c;
+    --color-card: #151b21;
+    --color-accent: #ff5964;
+    --color-accent-deep: #ff7a83;
+    --color-accent-fill: #c8102e;
+    --color-accent-fill-hover: #e02840;
+    --color-destructive: #ff5964;
+    --color-ring: #ff5964;
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
-  html[data-theme="light"] {
-    color-scheme: light;
+  html[data-theme="dark"] {
+    color-scheme: dark;
   }
 
   html {
@@ -81,6 +91,7 @@
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    font-weight: 400;
   }
 
   a,
@@ -95,7 +106,54 @@
   }
 
   ::selection {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-fill);
     color: #ffffff;
   }
+
+  ::placeholder {
+    color: var(--color-secondary);
+    opacity: 1;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-muted);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+}
+
+@utility hero-display {
+  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+@utility mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Section heading row: mono index inside a heavy rule, the sheet's wayfinding */
+@utility section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.875rem;
+  border-top: 2px solid var(--color-foreground);
+  padding-top: 1rem;
 }

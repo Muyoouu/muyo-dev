@@ -17,39 +17,41 @@ const formatDate = (date: Date) =>
 ---
 
 <BaseLayout
-  title="Writing — Musa Yohanes"
+  title="Writing · Musa Yohanes"
   description="Articles by Musa Yohanes on data analysis and automation, published on Medium."
 >
   <Header />
   <main class="flex-1">
     <section>
-      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <h1 class="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-          Writing
-        </h1>
-        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Articles on data analysis and automation.
+      <div class="mx-auto max-w-[1240px] px-6 py-16 md:py-20">
+        <div class="section-head">
+          <span class="font-mono text-sm font-semibold text-accent">00</span>
+          <h1 class="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            Application notes
+          </h1>
+        </div>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-secondary">
+          The long-form version of the work: data analysis and automation,
+          written up as I go. The same pieces live on Medium; these copies
+          stay here.
         </p>
         <ul class="mt-12 divide-y divide-border border-y border-border">
           {
             posts.map((post) => (
               <li>
-                <a
-                  href={`/blog/${post.id}/`}
-                  class="group block px-2 py-6 transition-colors duration-200 hover:bg-muted sm:px-4"
-                >
-                  <div class="flex flex-wrap items-baseline justify-between gap-2">
-                    <h2 class="text-lg font-semibold text-foreground transition-colors duration-200 group-hover:text-accent">
+                <a href={`/blog/${post.id}/`} class="group block py-7">
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    <h2 class="text-lg font-medium tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
                       {post.data.title}
                     </h2>
                     <time
                       datetime={post.data.pubDate.toISOString()}
-                      class="text-sm text-muted-foreground"
+                      class="font-mono text-xs text-secondary tabular-nums"
                     >
                       {formatDate(post.data.pubDate)}
                     </time>
                   </div>
-                  <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                  <p class="mt-2 max-w-2xl text-[15px] leading-relaxed text-secondary">
                     {post.data.description}
                   </p>
                 </a>
@@ -57,13 +59,13 @@ const formatDate = (date: Date) =>
             ))
           }
         </ul>
-        <p class="mt-8 text-sm text-muted-foreground">
-          Full articles on{' '}
+        <p class="mt-8 font-mono text-xs text-secondary">
+          Full archive on{' '}
           <a
             href="https://medium.com/@musayohanes00"
             target="_blank"
             rel="noopener noreferrer"
-            class="font-medium text-accent transition-colors duration-200 hover:underline"
+            class="font-medium text-accent transition-colors duration-200 hover:text-accent-deep hover:underline"
           >
             Medium
           </a>

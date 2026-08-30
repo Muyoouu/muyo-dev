@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content'
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
+import SpecCard from '../components/SpecCard.astro'
 import { profile } from '../data/profile'
 import BaseLayout from '../layouts/BaseLayout.astro'
 
@@ -10,68 +11,169 @@ const featuredProjects = (await getCollection('projects'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3)
 
-const { name, role, tagline, summary, skills, experience, socials } = profile
+const latestPosts = (await getCollection('writing'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3)
+
+const { experience, certifications, socials } = profile
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+
+const ratings = [
+  { param: 'Years in finance work', rating: '3' },
+  { param: 'PwC assurance', rating: 'Done' },
+  { param: 'SaaS built solo', rating: '1' },
+  { param: 'Bike trips analyzed', rating: '3.5M' },
+  { param: 'OAuth2 flows from scratch', rating: '1' },
+  { param: 'Token cache validity', rating: '60 days' },
+]
 ---
 
 <BaseLayout title={profile.site.title} description={profile.site.description}>
   <Header />
   <main class="flex-1">
-    <!-- Hero -->
-    <section class="border-b border-border">
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <p class="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-          {tagline}
-        </p>
-        <h1 class="mt-6 text-5xl font-bold tracking-tight text-foreground md:text-7xl">
-          {name}
-        </h1>
-        <p class="mt-4 text-xl font-medium text-accent md:text-2xl">{role}</p>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          {summary}
-        </p>
-        <div class="mt-10 flex flex-wrap gap-4">
-          <a
-            href="/portfolio"
-            class="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:opacity-90"
-          >
-            View work
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </a>
-          <a
-            href={`mailto:${socials.email}`}
-            class="inline-flex items-center gap-2 border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
-          >
-            Get in touch
-          </a>
+    <!-- Sheet cover: drawing frame, title block row, features and ratings -->
+    <section class="mx-auto max-w-[1240px] px-6 pt-8">
+      <div class="border-2 border-foreground">
+        <div class="grid grid-cols-2 border-b-2 border-foreground md:grid-cols-4">
+          <div class="border-r border-border px-5 py-3 max-md:[&:nth-child(2)]:border-r-0">
+            <p class="mono-label text-secondary">Title</p>
+            <p class="mt-1 text-sm font-semibold uppercase tracking-tight text-foreground">
+              Software Developer
+            </p>
+          </div>
+          <div class="border-border px-5 py-3 md:border-r">
+            <p class="mono-label text-secondary">Drawn by</p>
+            <p class="mt-1 text-sm font-semibold uppercase tracking-tight text-foreground">
+              Musa Yohanes
+            </p>
+          </div>
+          <div class="border-r border-border px-5 py-3 max-md:[&:nth-child(3)]:border-t max-md:[&:nth-child(3)]:border-border">
+            <p class="mono-label text-secondary">Location</p>
+            <p class="mt-1 text-sm font-semibold uppercase tracking-tight text-foreground">
+              Jakarta, ID
+            </p>
+          </div>
+          <div class="border-border px-5 py-3 max-md:[&:nth-child(4)]:border-t max-md:[&:nth-child(4)]:border-border">
+            <p class="mono-label text-secondary">Rev</p>
+            <p class="mt-1 font-mono text-sm font-semibold text-accent tabular-nums">2026&middot;A</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-[7fr_5fr]">
+          <div class="border-b-2 border-foreground p-8 md:border-b-0 md:border-r-2 md:p-12">
+            <p class="mono-label text-accent">Features</p>
+            <h1 class="hero-display mt-4 text-foreground">
+              I used to audit the books.
+              <span class="block text-accent">Now I write the software that runs them.</span>
+            </h1>
+            <p class="mt-6 max-w-xl text-lg leading-relaxed text-secondary">
+              I'm Musa. I build workflow automation at a Dutch SaaS company,
+              remote from Jakarta. Before that I audited financials at PwC and
+              taught accounting, so I know both sides of the systems I build.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-3">
+              <a
+                href="/portfolio"
+                class="mono-label inline-flex items-center bg-accent-fill px-6 py-3.5 text-white transition-colors duration-200 hover:bg-accent-fill-hover"
+              >
+                See the work
+              </a>
+              <a
+                href="/blog"
+                class="mono-label inline-flex items-center border-2 border-foreground px-6 py-3.5 text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
+              >
+                Read my writing
+              </a>
+            </div>
+          </div>
+
+          <div class="p-8 md:p-12 md:py-12">
+            <p class="mono-label text-secondary">Absolute maximum ratings</p>
+            <table class="mt-4 w-full border-collapse text-sm">
+              <thead>
+                <tr class="border-b border-border text-left">
+                  <th scope="col" class="mono-label py-2 pr-4 font-medium text-secondary">Parameter</th>
+                  <th scope="col" class="mono-label py-2 text-right font-medium text-secondary">Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  ratings.map((row) => (
+                    <tr class="border-b border-border last:border-b-0">
+                      <td class="py-2.5 pr-4 text-foreground">{row.param}</td>
+                      <td class="py-2.5 text-right font-mono font-medium text-accent tabular-nums">
+                        {row.rating}
+                      </td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+            <p class="mt-4 font-mono text-[11px] leading-relaxed text-secondary">
+              * Every rating above is on the record. No fabrication, no
+              rounding up.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Skills -->
-    <section class="border-b border-border">
-      <div class="mx-auto max-w-6xl px-6 py-16">
-        <h2 class="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-          Skills
-        </h2>
-        <ul class="mt-6 flex flex-wrap gap-3">
+    <!-- 01 Applications -->
+    <section class="mx-auto max-w-[1240px] px-6 py-16 md:py-20">
+      <div class="section-head">
+        <span class="font-mono text-sm font-semibold text-accent">01</span>
+        <h2 class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Applications</h2>
+        <a
+          href="/portfolio"
+          class="mono-label ml-auto text-secondary transition-colors duration-200 hover:text-accent"
+        >
+          Full catalog
+        </a>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {featuredProjects.map((project) => <SpecCard project={project} featured />)}
+      </div>
+    </section>
+
+    <!-- 02 Publications -->
+    <section class="border-y-2 border-foreground">
+      <div class="mx-auto max-w-[1240px] px-6 py-16 md:py-20">
+        <div class="section-head border-t-0 pt-0">
+          <span class="font-mono text-sm font-semibold text-accent">02</span>
+          <h2 class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Publications</h2>
+          <a
+            href="/blog"
+            class="mono-label ml-auto text-secondary transition-colors duration-200 hover:text-accent"
+          >
+            All writing
+          </a>
+        </div>
+        <ul class="mt-10 divide-y divide-border border-y border-border">
           {
-            skills.map((skill) => (
-              <li class="border border-border px-3 py-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:border-accent hover:text-accent">
-                {skill}
+            latestPosts.map((post) => (
+              <li>
+                <a href={`/blog/${post.id}/`} class="group block py-6">
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    <h3 class="text-lg font-medium tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+                      {post.data.title}
+                    </h3>
+                    <time
+                      datetime={post.data.pubDate.toISOString()}
+                      class="font-mono text-xs text-secondary tabular-nums"
+                    >
+                      {formatDate(post.data.pubDate)}
+                    </time>
+                  </div>
+                  <p class="mt-2 max-w-2xl text-[15px] leading-relaxed text-secondary">
+                    {post.data.description}
+                  </p>
+                </a>
               </li>
             ))
           }
@@ -79,95 +181,65 @@ const { name, role, tagline, summary, skills, experience, socials } = profile
       </div>
     </section>
 
-    <!-- Featured projects -->
-    <section class="border-b border-border">
-      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-            Featured projects
-          </h2>
-          <a
-            href="/portfolio"
-            class="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-accent"
-          >
-            All projects →
-          </a>
+    <!-- 03 Record -->
+    <section class="mx-auto max-w-[1240px] px-6 py-16 md:py-20">
+      <div class="section-head">
+        <span class="font-mono text-sm font-semibold text-accent">03</span>
+        <h2 class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Record</h2>
+        <a
+          href="/about"
+          class="mono-label ml-auto text-secondary transition-colors duration-200 hover:text-accent"
+        >
+          Full background
+        </a>
+      </div>
+      <div class="mt-10 grid gap-12 md:grid-cols-2">
+        <div>
+          <ol class="divide-y divide-border border-y border-border">
+            {
+              experience.map((job) => (
+                <li class="py-5">
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                    <h3 class="font-medium text-foreground">
+                      {job.role} &middot; {job.company}
+                    </h3>
+                    <p class="font-mono text-xs text-secondary tabular-nums">{job.period}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
         </div>
-        <div class="mt-10 grid gap-6 md:grid-cols-3">
-          {
-            featuredProjects.map((project) => (
-              <a
-                href={`/projects/${project.id}/`}
-                class="group flex flex-col border border-border bg-card p-6 transition-colors duration-200 hover:border-accent"
-              >
-                <h3 class="text-lg font-semibold text-foreground transition-colors duration-200 group-hover:text-accent">
-                  {project.data.title}
-                </h3>
-                <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {project.data.description}
-                </p>
-                <ul class="mt-5 flex flex-wrap gap-2">
-                  {project.data.tags.map((tag) => (
-                    <li class="border border-border px-2 py-0.5 text-xs font-medium text-muted-foreground">
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </a>
-            ))
-          }
+        <div>
+          <ul class="divide-y divide-border border-y border-border">
+            {
+              certifications.map((cert) => (
+                <li class="flex items-baseline justify-between gap-4 py-4 text-[15px] font-medium text-foreground">
+                  {cert}
+                  <span class="mono-label shrink-0 text-secondary" aria-hidden="true">Cert</span>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Experience -->
-    <section class="border-b border-border">
-      <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-          Experience
-        </h2>
-        <ol class="mt-10 space-y-10 border-l border-border pl-8">
-          {
-            experience.map((job) => (
-              <li class="relative">
-                <span
-                  class="absolute -left-[37px] top-1.5 h-2.5 w-2.5 border border-accent bg-background"
-                  aria-hidden="true"
-                />
-                <div class="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 class="text-lg font-semibold text-foreground">
-                    {job.role} · {job.company}
-                  </h3>
-                  <p class="text-sm text-muted-foreground">{job.period}</p>
-                </div>
-                <ul class="mt-3 space-y-1.5">
-                  {job.points.map((point) => (
-                    <li class="text-sm leading-relaxed text-muted-foreground">
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section>
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <h2 class="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-          Get in touch
-        </h2>
-        <p class="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          Want to talk about a project or a job? Email works best. Or find me
-          on the platforms below.
+    <!-- 04 Operator -->
+    <section class="border-t-2 border-foreground">
+      <div class="mx-auto max-w-[1240px] px-6 py-20 md:py-24">
+        <div class="section-head border-t-0 pt-0">
+          <span class="font-mono text-sm font-semibold text-accent">04</span>
+          <h2 class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Operator</h2>
+        </div>
+        <p class="mt-8 max-w-xl text-lg leading-relaxed text-secondary">
+          Want to talk about a role, a project, or the finance-to-software
+          path? Email works best, and I answer everything.
         </p>
-        <div class="mt-8 flex flex-wrap gap-4">
+        <div class="mt-8 flex flex-wrap gap-3">
           <a
             href={`mailto:${socials.email}`}
-            class="inline-flex items-center bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:opacity-90"
+            class="mono-label inline-flex items-center bg-accent-fill px-6 py-3.5 text-white transition-colors duration-200 hover:bg-accent-fill-hover"
           >
             Email me
           </a>
@@ -175,7 +247,7 @@ const { name, role, tagline, summary, skills, experience, socials } = profile
             href={socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
+            class="mono-label inline-flex items-center border-2 border-foreground px-6 py-3.5 text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
           >
             LinkedIn
           </a>
@@ -183,7 +255,7 @@ const { name, role, tagline, summary, skills, experience, socials } = profile
             href={socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
+            class="mono-label inline-flex items-center border-2 border-foreground px-6 py-3.5 text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
           >
             GitHub
           </a>

@@ -46,7 +46,7 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title={`${title} — Musa Yohanes`}
+  title={`${title} · Musa Yohanes`}
   description={description}
   {...(image && { image })}
   jsonLd={jsonLd}
@@ -55,96 +55,116 @@ const jsonLd = {
   <main class="flex-1">
     <article>
       <div class="mx-auto max-w-3xl px-6 py-16 md:py-20">
-        <p class="text-sm font-medium text-accent">
-          <a href="/portfolio" class="transition-colors duration-200 hover:underline"
-            >← Portfolio</a
-          >
-        </p>
-        <h1 class="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-          {title}
-        </h1>
-        <p class="mt-4 text-lg leading-relaxed text-muted-foreground">{description}</p>
-        <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
-          {role && <span class="font-medium text-foreground">{role}</span>}
-          {role && <span aria-hidden="true">·</span>}
-          <time datetime={date.toISOString()}>{formatDate(date)}</time>
-          {
-            repo && (
-              <>
-                <span aria-hidden="true">·</span>
-                <a
-                  href={repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="transition-colors duration-200 hover:text-accent"
-                >
-                  Source on GitHub
-                </a>
-              </>
-            )
-          }
-          {
-            demo && (
-              <>
-                <span aria-hidden="true">·</span>
-                <a
-                  href={demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="transition-colors duration-200 hover:text-accent"
-                >
-                  View demo
-                </a>
-              </>
-            )
-          }
-          {
-            url && (
-              <>
-                <span aria-hidden="true">·</span>
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="transition-colors duration-200 hover:text-accent"
-                >
-                  Related article on Medium
-                </a>
-              </>
-            )
-          }
+        <a
+          href="/portfolio"
+          class="mono-label text-secondary transition-colors duration-200 hover:text-accent"
+        >
+          &larr; Catalog
+        </a>
+
+        <!-- Datasheet header: title block row -->
+        <div class="mt-6 border-2 border-foreground">
+          <div class="border-b-2 border-foreground px-6 py-5">
+            <h1 class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+              {title}
+            </h1>
+            <p class="mt-2 text-[15px] leading-relaxed text-secondary">{description}</p>
+          </div>
+          <dl class="grid grid-cols-2 divide-border md:grid-cols-4 md:divide-x">
+            <div class="border-r border-border px-5 py-3 max-md:[&:nth-child(2)]:border-r-0 md:border-r-0">
+              <dt class="mono-label text-secondary">Role</dt>
+              <dd class="mt-1 text-sm font-semibold text-foreground">{role ?? 'Developer'}</dd>
+            </div>
+            <div class="px-5 py-3 max-md:[&:nth-child(-n+2)]:border-b max-md:[&:nth-child(-n+2)]:border-border md:border-r-0">
+              <dt class="mono-label text-secondary">Date</dt>
+              <dd class="mt-1 font-mono text-sm font-medium text-foreground tabular-nums">
+                {formatDate(date)}
+              </dd>
+            </div>
+            <div class="border-r border-border px-5 py-3 max-md:[&:nth-child(3)]:border-t max-md:[&:nth-child(3)]:border-border max-md:[&:nth-child(3)]:border-r-0">
+              <dt class="mono-label text-secondary">Primary</dt>
+              <dd class="mt-1 font-mono text-sm font-medium text-foreground">{tags.at(0)}</dd>
+            </div>
+            <div class="px-5 py-3 max-md:[&:nth-child(4)]:border-t max-md:[&:nth-child(4)]:border-border">
+              <dt class="mono-label text-secondary">Links</dt>
+              <dd class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-sm font-medium">
+                {
+                  repo && (
+                    <a
+                      href={repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-accent transition-colors duration-200 hover:text-accent-deep hover:underline"
+                    >
+                      Source
+                    </a>
+                  )
+                }
+                {
+                  demo && (
+                    <a
+                      href={demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-accent transition-colors duration-200 hover:text-accent-deep hover:underline"
+                    >
+                      Demo
+                    </a>
+                  )
+                }
+                {
+                  url && (
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-accent transition-colors duration-200 hover:text-accent-deep hover:underline"
+                    >
+                      Article
+                    </a>
+                  )
+                }
+                {
+                  !repo && !demo && !url && <span class="text-secondary">Internal</span>
+                }
+              </dd>
+            </div>
+          </dl>
         </div>
-        <ul class="mt-4 flex flex-wrap gap-2">
+
+        <ul class="mt-6 flex flex-wrap gap-1.5">
           {
             tags.map((tag) => (
-              <li class="border border-border px-2 py-0.5 text-xs font-medium text-muted-foreground">
+              <li class="mono-label border border-border px-2 py-1 text-[0.625rem] text-secondary">
                 {tag}
               </li>
             ))
           }
         </ul>
+
         {
           image && (
             <img
               src={image}
               alt={`Screenshot of ${title}`}
               loading="lazy"
-              class="mt-8 w-full border border-border"
+              class="mt-8 w-full border-2 border-foreground"
               width="1200"
               height="630"
             />
           )
         }
+
         <div
-          class="prose mt-10 max-w-none dark:prose-invert
-            prose-headings:tracking-tight prose-headings:text-foreground
-            prose-p:text-muted-foreground prose-p:leading-relaxed
-            prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-foreground
-            prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
-            prose-pre:border prose-pre:border-border prose-pre:bg-card
-            prose-blockquote:border-accent prose-blockquote:text-muted-foreground
-            prose-img:rounded-none prose-img:border prose-img:border-border
+          class="prose mt-10 max-w-none
+            prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground
+            prose-p:text-secondary prose-p:leading-relaxed
+            prose-a:font-medium prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+            prose-strong:font-medium prose-strong:text-foreground
+            prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:font-normal prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
+            prose-pre:border prose-pre:border-border prose-pre:bg-muted
+            prose-blockquote:border-l-2 prose-blockquote:border-l-accent prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-secondary
+            prose-img:border-2 prose-img:border-foreground
             prose-hr:border-border"
         >
           <Content />
