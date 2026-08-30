@@ -49,7 +49,7 @@ const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'sh
     </div>
 
     <!-- Rear face: the spec label -->
-    <div class="package-face package-rear absolute inset-0 flex flex-col border-2 border-accent bg-card [transform:rotateY(180deg)]">
+    <div class="package-face package-rear flex flex-col border-2 border-accent bg-card [transform:rotateY(180deg)]">
       <div class="flex items-center justify-between border-b border-border bg-accent-fill px-5 py-2.5">
         <span class="mono-label text-white">Spec</span>
         <span class="font-mono text-xs text-white tabular-nums">{dateLabel}</span>
@@ -102,12 +102,14 @@ const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'sh
 
   .package-inner {
     position: relative;
+    display: grid;
     height: 100%;
     transform-style: preserve-3d;
     transition: transform 0.55s var(--ease-sheet);
   }
 
   .package-face {
+    grid-area: 1 / 1;
     backface-visibility: hidden;
   }
 
