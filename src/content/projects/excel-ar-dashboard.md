@@ -7,7 +7,7 @@ date: 2023-08-01
 repo: https://github.com/Muyoouu/excel-ar-dashboard
 role: "Developer"
 demo: https://www.youtube.com/watch?v=KTbFauEHCGE
-image: https://raw.githubusercontent.com/Muyoouu/excel-ar-dashboard/main/img/overview.jpg
+image: /images/projects/ar-dashboard.webp
 ---
 
 ## The problem

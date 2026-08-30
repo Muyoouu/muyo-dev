@@ -9,7 +9,7 @@ url: https://medium.com/@musayohanes00/navigating-oauth2-authentication-in-vba-3
 repo: https://github.com/Muyoouu/vba-xero-api
 role: "Developer & Maintainer"
 demo: https://www.youtube.com/watch?v=iIuOBq_MYrw
-image: https://raw.githubusercontent.com/Muyoouu/vba-xero-api/main/img/user_interface.jpg
+image: /images/projects/xero-integration.webp
 ---
 
 ## The problem
