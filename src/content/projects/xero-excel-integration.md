@@ -1,6 +1,6 @@
 ---
 title: "Xero API × Excel Integration"
-description: "VBA macros that connect Xero's accounting API to Excel, with OAuth2 implemented from scratch."
+description: "VBA macros that plug Xero's accounting API straight into Excel. I wrote the whole OAuth2 flow myself, including the part where Internet Explorer used to live."
 tags: ["VBA", "Xero API", "Excel", "OAuth2"]
 featured: true
 order: 2

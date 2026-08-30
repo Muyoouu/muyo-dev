@@ -1,6 +1,6 @@
 ---
 title: "Cyclistic Rider Analysis with SQL and Python"
-description: "Analysis of 3.5 million bike-share trips for the Google Data Analytics capstone, with SQL cleaning in PostgreSQL and exploratory analysis in Python and pandas."
+description: "My Google Data Analytics capstone: 3.5 million Chicago bike-share trips cleaned up in PostgreSQL and taken apart in pandas."
 tags: ["SQL", "PostgreSQL", "Python", "Pandas", "Data Analysis"]
 role: "Data Analyst"
 order: 5

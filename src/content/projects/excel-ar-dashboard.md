@@ -1,6 +1,6 @@
 ---
 title: "Accounts Receivable Dashboard"
-description: "Excel dashboard for tracking accounts receivable, built on a real data model with VBA-generated reports."
+description: "An Excel dashboard for tracking what customers owe, built on a real data model with VBA-generated reports. My PwC audit days picked the numbers it watches."
 tags: ["Excel", "VBA", "Data Modeling"]
 order: 4
 date: 2023-08-01

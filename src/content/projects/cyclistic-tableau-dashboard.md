@@ -1,6 +1,6 @@
 ---
 title: "Cyclistic Rider Dashboard in Tableau"
-description: "Interactive Tableau dashboard built on the Cyclistic capstone analysis, so the marketing team can explore casual and member rider behavior on their own."
+description: "The Tableau half of my Cyclistic capstone, so the marketing team can dig into rider behavior without touching my SQL."
 tags: ["Tableau", "Data Viz", "Data Analysis"]
 role: "Data Analyst"
 order: 6

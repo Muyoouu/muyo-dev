@@ -1,6 +1,6 @@
 ---
 title: "Instagram Engagement Scraper"
-description: "Python scripts that scrape public Instagram profiles with Instagrapi, store the data as JSON, and survive interruptions with resume-from-checkpoint, built for engagement analysis."
+description: "Python scripts that scrape public Instagram profiles, store everything as JSON, and pick up where they left off after a rate limit knocks them down."
 tags: ["Python", "Web Scraping", "Data Analysis"]
 role: "Developer"
 order: 7

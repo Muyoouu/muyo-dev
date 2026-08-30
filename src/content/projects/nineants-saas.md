@@ -1,6 +1,6 @@
 ---
-title: "Workflow Automation SaaS — Solo Built"
-description: "Workflow automation SaaS built by one developer. Python APIs, React frontend, MongoDB, Docker on Azure, plus production, monitoring, and user onboarding."
+title: "Workflow Automation SaaS. Solo built."
+description: "The workflow automation SaaS I built and run solo at Automation Boutique: Python APIs, a React frontend, MongoDB and Docker on Azure. Every early architecture call was mine, and so is the monitoring."
 tags: ["Python", "React", "MongoDB", "Docker", "Azure"]
 featured: true
 order: 1

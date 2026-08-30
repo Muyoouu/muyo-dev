@@ -1,6 +1,6 @@
 ---
 title: "Global Energy Consumption Dashboard"
-description: "Interactive Tableau dashboard on global energy use, covering country comparisons, growth rates, and energy mix over time."
+description: "An interactive Tableau dashboard on global energy use: country comparisons, growth rates, and how the energy mix shifts over time."
 tags: ["Tableau", "Data Viz", "LOD Expressions"]
 featured: true
 order: 3
