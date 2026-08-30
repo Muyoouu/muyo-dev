@@ -27,9 +27,6 @@
     "solid-js": "1.9.15",
     "tailwindcss": "4.3.3"
   },
-  "allowScripts": {
-    "esbuild": true
-  },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@astrojs/rss": "^4.0.19",
