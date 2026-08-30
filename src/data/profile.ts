@@ -42,10 +42,10 @@ export interface Profile {
 export const profile: Profile = {
   name: 'Musa Yohanes',
   role: 'Software Developer',
-  tagline: 'Software Developer · ex-PwC',
+  tagline: 'Software Developer · Former Financial Auditor at PwC',
   location: 'Jakarta, Indonesia',
   summary:
-    'I build software for a SaaS company that automates business workflows. Before this I was a PwC auditor and taught accounting, so I know the code side and the finance work it replaces. I build tools people actually want to use.',
+    'I build software for a SaaS company that automates business workflows. Before this I worked as a financial auditor at PwC and taught accounting, so I know the code side and the finance work it replaces. I build tools people actually want to use.',
   skills: [
     'Python',
     'React',
@@ -123,6 +123,6 @@ export const profile: Profile = {
   site: {
     title: 'Musa Yohanes',
     description:
-      'Software developer in Jakarta. I build workflow automation at a SaaS company. Used to audit finances at PwC.',
+      'Software developer in Jakarta. I build workflow automation at a SaaS company. Former financial auditor at PwC.',
   },
 }
