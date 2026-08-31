@@ -6,6 +6,21 @@
 @import "@fontsource-variable/jetbrains-mono";
 @plugin "@tailwindcss/typography";
 
+/*
+ * Metric-matched fallback for Barlow (Arial/Liberation Sans/Roboto).
+ * Prevents FOUT layout shift while `font-display: swap` resolves:
+ * line box (asc 100% / desc 20% / gap 0) and avg advance width
+ * (size-adjust 98.85%) are tuned to Barlow's real font metrics.
+ */
+@font-face {
+  font-family: "Barlow Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans"), local("Roboto");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+  size-adjust: 98.85%;
+}
+
 @custom-variant dark ([data-theme="dark"] &);
 
 /*
@@ -14,7 +29,7 @@
  * Dark mode is the night bench inverse. Radius zero; rules carry the depth.
  */
 @theme {
-  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Barlow", "Barlow Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
 
   --color-background: #ffffff;

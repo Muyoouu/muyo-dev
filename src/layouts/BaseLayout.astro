@@ -1,5 +1,18 @@
 ---
 import '../styles/global.css'
+import barlow400 from '@fontsource/barlow/files/barlow-latin-400-normal.woff2?url'
+import barlow500 from '@fontsource/barlow/files/barlow-latin-500-normal.woff2?url'
+import barlow600 from '@fontsource/barlow/files/barlow-latin-600-normal.woff2?url'
+import barlow700 from '@fontsource/barlow/files/barlow-latin-700-normal.woff2?url'
+import jetbrainsMono from '@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url'
+
+const preloadFonts = [
+  ['font', 'font/woff2', barlow400],
+  ['font', 'font/woff2', barlow500],
+  ['font', 'font/woff2', barlow600],
+  ['font', 'font/woff2', barlow700],
+  ['font', 'font/woff2', jetbrainsMono],
+] as const
 
 interface Props {
   title: string
@@ -48,6 +61,10 @@ const jsonLdBlocks = [personJsonLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {preloadFonts.map(([, , href]) => (
+      <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+    ))}
 
     <title>{title}</title>
     <meta name="description" content={description} />

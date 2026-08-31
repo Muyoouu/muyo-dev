@@ -29,11 +29,14 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "@astrojs/markdown-satteri": "^0.3.8",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@biomejs/biome": "2.5.11",
     "@tailwindcss/typography": "^0.5.20",
     "@typescript/native-preview": "7.0.0-dev.20260707.2",
+    "image-size": "^2.0.2",
+    "satteri": "^0.10.5",
     "typescript": "6.0.3",
     "wrangler": "4.127.1"
   }
