@@ -136,6 +136,12 @@ const jsonLdBlocks = [personJsonLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the
       verdict, DESIGN.md, and every shipping raster carrying its provenance.
     -->
+    <a
+      href="#main"
+      class="mono-label sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-accent-fill focus:px-4 focus:py-3 focus:text-white"
+    >
+      Skip to content
+    </a>
     <slot />
     <script>
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches

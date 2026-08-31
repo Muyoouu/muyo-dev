@@ -78,7 +78,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
       aria-pressed={theme() === 'dark'}
-      class="inline-flex h-9 w-9 items-center justify-center rounded-none border border-border bg-card text-foreground transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-none border border-border bg-card text-foreground transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       {theme() === 'dark' ? <SunIcon /> : <MoonIcon />}
     </button>
