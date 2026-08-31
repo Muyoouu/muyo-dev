@@ -146,17 +146,24 @@ const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'sh
 
     const setFlipped = (flipped: boolean) => {
       pkg.toggleAttribute('data-flipped', flipped)
+      if (flipped) pkg.removeAttribute('data-hold')
       show.setAttribute('aria-expanded', String(flipped))
     }
 
+    // Unflip and hold, so a still-hovering pointer or the focus that lands
+    // on the front show button cannot instantly re-flip the card.
+    const unflip = () => {
+      setFlipped(false)
+      pkg.setAttribute('data-hold', '')
+      show.focus({ preventScroll: true })
+    }
+
     show.addEventListener('click', () => setFlipped(true))
-    hide.addEventListener('click', () => setFlipped(false))
+    hide.addEventListener('click', unflip)
     pkg.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && pkg.hasAttribute('data-flipped')) {
-        setFlipped(false)
-        show.focus()
-      }
+      if (event.key === 'Escape' && pkg.hasAttribute('data-flipped')) unflip()
     })
+    pkg.addEventListener('pointerleave', () => pkg.removeAttribute('data-hold'))
   }
 </script>
 
@@ -199,9 +206,19 @@ const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'sh
     }
   }
 
-  .package:focus-within .package-inner,
+  /* Only focus landing inside the rear face flips the card — focus on the
+     front (title, show button) must not. Focus within the hidden rear means
+     a keyboard or assistive-tech user reached the spec links. */
+  .package-inner:has(.package-rear:focus-within),
   .package[data-flipped] .package-inner {
     transform: rotateY(180deg);
+  }
+
+  /* Hold override: keeps the card on its front face after Back/Escape until
+     the pointer leaves, so lingering :hover cannot re-flip it. Must stay the
+     last transform rule to win the cascade tie with :hover. */
+  .package[data-hold] .package-inner {
+    transform: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
