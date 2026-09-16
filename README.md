@@ -27,6 +27,7 @@ pnpm dev
 | `pnpm lint`        | Check code with Biome                        |
 | `pnpm lint:fix`    | Fix lint and formatting issues               |
 | `pnpm check`       | Run `astro check`                            |
+| `pnpm check:frozen` | Fail if a frozen article body changed         |
 | `pnpm check:ts`    | Type-check with tsgo                         |
 | `pnpm deploy`      | Build and deploy to Cloudflare with Wrangler |
 

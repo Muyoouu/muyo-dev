@@ -18,7 +18,7 @@ Accounting professionals live in Excel. They plan, analyze, and reconcile inside
 
 ## What I built
 
-A set of VBA macros that connects Excel to the Xero API, released publicly on GitHub. I implemented the full OAuth2 flow from scratch, driving a real Chrome browser through the Chrome DevTools Protocol to complete the login where Internet Explorer used to be. The project builds on the VBA-Web framework for the HTTP side, along with open-source modules for browser automation and UI helpers, and making it public was my way of giving back to that community.
+A set of VBA macros that connects Excel to the Xero API, released on GitHub. I wrote the OAuth2 flow myself, driving a real Chromium browser through the Chrome DevTools Protocol to complete the login where Internet Explorer used to be. The HTTP layer runs on the VBA-Web framework, and the login browser is driven by Chromium-Automation-with-CDP-for-VBA.
 
 ## How it works
 
@@ -26,4 +26,6 @@ On top of the auth layer sits a simple interface inside Excel with options for l
 
 The script caches the access and refresh tokens, so users stay logged in for up to 60 days without repeating the login, and it refreshes tokens automatically in the background. When a user belongs to multiple Xero organizations, the script retrieves the authorized tenant IDs, saves them inside the Excel file, and lets the user pick which organization to pull data from.
 
-I wrote a step-by-step guide on implementing the whole authentication flow in [Navigating OAuth2 Authentication in VBA](/blog/navigating-oauth2-authentication-in-vba/). The full source is available on [GitHub](https://github.com/Muyoouu/vba-xero-api), and there is a [demo video](https://www.youtube.com/watch?v=iIuOBq_MYrw) showing the tool in action.
+One caveat the project states plainly: Xero's flow requires a client secret, and a workbook is not a safe place to keep one. That is a real ceiling on what this pattern can be used for.
+
+I wrote a step-by-step guide to the whole authentication flow in [Navigating OAuth2 Authentication in VBA](/blog/navigating-oauth2-authentication-in-vba/).

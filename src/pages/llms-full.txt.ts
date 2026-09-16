@@ -32,6 +32,7 @@ export async function GET(_context: APIContext) {
       `- Source: ${SITE}/projects/${project.id}/`,
       `- Tags: ${project.data.tags.join(', ')}`,
       ...(project.data.repo ? [`- Repository: ${project.data.repo}`] : []),
+      ...(project.data.demo ? [`- Demo: ${project.data.demo}`] : []),
       ...(project.data.url ? [`- Related article: ${project.data.url}`] : []),
       '',
       project.body,

@@ -15,6 +15,7 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "check": "astro check",
+    "check:frozen": "node scripts/check-frozen-bodies.mjs",
     "deploy": "astro build && wrangler deploy",
     "check:ts": "tsgo --noEmit"
   },

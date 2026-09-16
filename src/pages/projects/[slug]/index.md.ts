@@ -13,7 +13,7 @@ export const getStaticPaths = (async () => {
 
 export const GET: APIRoute<Props> = async ({ props }) => {
   const { project } = props
-  const { title, description, tags, url, repo, date } = project.data
+  const { title, description, tags, url, repo, demo, date } = project.data
 
   const quote = (value: string) => value.replace(/"/g, '\\"')
   const lines = [
@@ -26,6 +26,7 @@ export const GET: APIRoute<Props> = async ({ props }) => {
   ]
   if (url) lines.push(`url: "${url}"`)
   if (repo) lines.push(`repo: "${repo}"`)
+  if (demo) lines.push(`demo: "${demo}"`)
   lines.push('---', '')
 
   return new Response(`${lines.join('\n')}${project.body}\n`, {
