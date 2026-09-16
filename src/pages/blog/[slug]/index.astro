@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content'
 import Footer from '../../../components/Footer.astro'
 import Header from '../../../components/Header.astro'
 import BaseLayout from '../../../layouts/BaseLayout.astro'
+import { getPostNeighbors } from '../../../lib/writing'
 
 export async function getStaticPaths() {
   const posts = await getCollection('writing')
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props
 const { Content } = await render(post)
+const { newer, older } = getPostNeighbors(await getCollection('writing'), post.id)
 
 const { title, description, pubDate, url, tags } = post.data
 
@@ -96,15 +98,62 @@ const jsonLd = {
         >
           <Content />
         </div>
-        <div class="mt-12 border-t-2 border-foreground pt-8">
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mono-label text-accent transition-colors duration-200 hover:text-accent-deep hover:underline"
+        <div class="mt-12 border-t-2 border-foreground">
+          <nav
+            aria-label="Post navigation"
+            class="flex flex-col divide-y divide-border md:flex-row md:divide-x md:divide-y-0"
           >
-            Continue on Medium
-          </a>
+            {
+              older && (
+                <a
+                  href={`/blog/${older.id}/`}
+                  rel="prev"
+                  class="group min-w-0 flex-1 py-6 transition-colors duration-200 md:pr-8"
+                >
+                  <span class="mono-label text-secondary">Older</span>
+                  <span class="mt-2 block text-lg font-medium tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+                    {older.data.title}
+                  </span>
+                  <span class="mt-1 block font-mono text-xs text-secondary tabular-nums">
+                    {formatDate(older.data.pubDate)}
+                  </span>
+                </a>
+              )
+            }
+            {
+              newer && (
+                <a
+                  href={`/blog/${newer.id}/`}
+                  rel="next"
+                  class={`group min-w-0 flex-1 py-6 transition-colors duration-200 ${older ? 'md:pl-8 md:text-right' : ''}`}
+                >
+                  <span class="mono-label text-secondary">Newer</span>
+                  <span class="mt-2 block text-lg font-medium tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+                    {newer.data.title}
+                  </span>
+                  <span class="mt-1 block font-mono text-xs text-secondary tabular-nums">
+                    {formatDate(newer.data.pubDate)}
+                  </span>
+                </a>
+              )
+            }
+          </nav>
+          <div class="flex flex-wrap items-center justify-between gap-x-8 border-t border-border">
+            <a
+              href="/blog"
+              class="mono-label inline-flex min-h-11 items-center text-secondary transition-colors duration-200 hover:text-accent"
+            >
+              Application notes
+            </a>
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mono-label inline-flex min-h-11 items-center text-accent transition-colors duration-200 hover:text-accent-deep hover:underline"
+            >
+              Continue on Medium
+            </a>
+          </div>
         </div>
       </div>
     </article>
