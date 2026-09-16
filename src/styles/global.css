@@ -86,14 +86,15 @@
     *,
     *::before,
     *::after {
+      /* biome-ignore-start lint/complexity/noImportantStyles: a reduced-motion override has to beat every author transition, including utility classes and inline styles */
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+      /* biome-ignore-end lint/complexity/noImportantStyles: end of reduced-motion override */
     }
   }
 
   body {
-    min-height: 100vh;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
