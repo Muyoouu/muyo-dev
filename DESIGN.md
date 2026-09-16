@@ -57,12 +57,12 @@ One signal-red voice on white stock. No cream, no bone, no gradient anywhere in 
 
 ## Typography
 
-- **Families:** Barlow 400/500/600/700 (`@fontsource/barlow`) for all sans text; JetBrains Mono Variable (`@fontsource-variable/jetbrains-mono`) for part numbers, dates, figures, uppercase labels. No other faces.
+- **Families:** Barlow 400/500/600/700 plus 400 italic (`@fontsource/barlow`) for all sans text; JetBrains Mono Variable (`@fontsource-variable/jetbrains-mono`) for part numbers, dates, figures, uppercase labels. No other faces.
 - **`hero-display` utility:** `clamp(2.5rem, 5.5vw, 4.75rem)` / 1.02 / −0.015em / **weight 600** / `text-wrap: balance`. Home hero and 404 only.
 - **`mono-label` utility:** JetBrains Mono, 11px (0.6875rem), weight 500, `letter-spacing: 0.12em`, uppercase. The sheet's label voice — nav cells, buttons, card bars, table heads, section side-links, tags, footer links all use it.
 - **`section-head` utility:** flex row, `border-top: 2px solid var(--color-foreground)`, 1rem padding-top; red mono index (e.g. `01`) + H2 (`text-2xl md:text-3xl`, weight 600, tracking-tight) + right-aligned `mono-label` link. Interior H1s use the same row at `text-3xl md:text-4xl`. Section numbering 00–04 is the sheet's wayfinding.
 - **Body:** 18px (`text-lg`) for statements and section intros; 15px for card descriptions and list decks; metadata 12px mono `tabular-nums` for every date/period.
-- **Prose** (`@tailwindcss/typography`, project/article pages): headings weight 600 tracking-tight ink; body secondary; links red, no underline → underline on hover; code on `bg-muted` chip; blockquote left border **2px red**, non-italic; images and pre blocks `border-2 border-foreground`.
+- **Prose** (`@tailwindcss/typography`, project/article pages): headings weight 600 tracking-tight ink; body secondary; links red, no underline → underline on hover; code on `bg-muted` chip; blockquote left border **2px red**, weight 400 italic ink, with its inner `p` forced to `inherit` (a `prose-p:` rule otherwise wins) and the plugin's generated `open-quote` / `close-quote` pseudo-elements suppressed, since the markdown carries its own punctuation; images and pre blocks `border-2 border-foreground`.
 - Numbers (dates, periods, ratings) are always `tabular-nums` — most sit in JetBrains Mono.
 
 ## Spacing & Layout
