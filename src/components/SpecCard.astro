@@ -16,7 +16,11 @@ const links = [
   ...(url ? [{ href: url, label: 'Article' }] : []),
 ]
 
-const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
+const dateLabel = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  timeZone: 'UTC',
+})
 ---
 
 <article class="package group" data-package data-reveal={featured ? 'flip' : ''}>
