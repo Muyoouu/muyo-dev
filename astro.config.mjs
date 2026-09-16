@@ -14,6 +14,12 @@ export default defineConfig({
   devToolbar: { enabled: false },
 
   markdown: {
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: false,
+      langAlias: { vba: 'vb' },
+      wrap: true
+    },
     processor: satteri({
       hastPlugins: [rehypeImageDimensions]
     })

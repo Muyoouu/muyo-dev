@@ -5,6 +5,16 @@
 @custom-variant dark ([data-theme="dark"] &);
 
 /*
+ * Inline code only. The typography plugin's `pre code` reset and the
+ * `prose-code:*` utilities land in the same cascade layer, so a plain
+ * `prose-code:` chip paints over fenced blocks. Scoping to `:not(pre) > code`
+ * keeps code blocks on the Shiki theme.
+ */
+@custom-variant prose-inline-code (
+  &.prose :where(:not(pre) > code):not(:where([class~="not-prose"], [class~="not-prose"] *))
+);
+
+/*
  * Component Datasheet — seed a529239b, assigned direction (code-led build).
  * Crisp white stock, cool ink, one signal-red voice. No cream, no bone.
  * Dark mode is the night bench inverse. Radius zero; rules carry the depth.
@@ -129,6 +139,33 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--color-accent);
   }
+}
+
+/*
+ * Shiki dual themes (`defaultColor: false`) emit --shiki-light/--shiki-dark
+ * variables only; these rules resolve them against the site theme toggle.
+ */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Keep the block-level code box on the pre's full width. */
+.prose pre code {
+  display: block;
+  min-width: 100%;
+}
+
+/* Break long URLs in prose so they cannot push the page wider than the viewport. */
+.prose {
+  overflow-wrap: break-word;
 }
 
 @utility hero-display {
