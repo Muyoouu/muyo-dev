@@ -5,15 +5,14 @@ import Header from '../components/Header.astro'
 import SpecCard from '../components/SpecCard.astro'
 import { profile } from '../data/profile'
 import BaseLayout from '../layouts/BaseLayout.astro'
+import { sortPostsDesc } from '../lib/writing'
 
 const featuredProjects = (await getCollection('projects'))
   .filter((project) => project.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3)
 
-const latestPosts = (await getCollection('writing'))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3)
+const latestPosts = sortPostsDesc(await getCollection('writing')).slice(0, 3)
 
 const { experience, certifications, socials } = profile
 

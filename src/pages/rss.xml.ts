@@ -1,11 +1,10 @@
 import { getCollection } from 'astro:content'
 import rss from '@astrojs/rss'
 import type { APIContext } from 'astro'
+import { sortPostsDesc } from '../lib/writing'
 
 export async function GET(context: APIContext) {
-  const posts = (await getCollection('writing')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-  )
+  const posts = sortPostsDesc(await getCollection('writing'))
 
   return rss({
     title: 'Musa Yohanes — Writing',
