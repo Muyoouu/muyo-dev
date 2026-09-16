@@ -1,0 +1,71 @@
+---
+import { formatDate } from '../lib/format'
+
+interface Neighbor {
+  href: string
+  label: string
+  title: string
+  date: Date
+}
+
+interface Props {
+  navLabel: string
+  previous: Neighbor | undefined
+  next: Neighbor | undefined
+  backHref: string
+  backLabel: string
+}
+
+const { navLabel, previous, next, backHref, backLabel } = Astro.props
+---
+
+<div class="mt-12 border-t-2 border-foreground">
+  <nav
+    aria-label={navLabel}
+    class="flex flex-col divide-y divide-border md:flex-row md:divide-x md:divide-y-0"
+  >
+    {
+      previous && (
+        <a
+          href={previous.href}
+          rel="prev"
+          class="group min-w-0 flex-1 py-6 transition-colors duration-200 md:pr-8"
+        >
+          <span class="mono-label text-secondary">{previous.label}</span>
+          <span class="mt-2 block text-lg font-medium tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+            {previous.title}
+          </span>
+          <span class="mt-1 block font-mono text-xs text-secondary tabular-nums">
+            {formatDate(previous.date)}
+          </span>
+        </a>
+      )
+    }
+    {
+      next && (
+        <a
+          href={next.href}
+          rel="next"
+          class={`group min-w-0 flex-1 py-6 transition-colors duration-200 ${previous ? 'md:pl-8 md:text-right' : ''}`}
+        >
+          <span class="mono-label text-secondary">{next.label}</span>
+          <span class="mt-2 block text-lg font-medium tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+            {next.title}
+          </span>
+          <span class="mt-1 block font-mono text-xs text-secondary tabular-nums">
+            {formatDate(next.date)}
+          </span>
+        </a>
+      )
+    }
+  </nav>
+  <div class="flex flex-wrap items-center justify-between gap-x-8 border-t border-border">
+    <a
+      href={backHref}
+      class="mono-label inline-flex min-h-11 items-center text-secondary transition-colors duration-200 hover:text-accent"
+    >
+      {backLabel}
+    </a>
+    <slot name="extra" />
+  </div>
+</div>
