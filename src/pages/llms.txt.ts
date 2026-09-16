@@ -21,7 +21,7 @@ export async function GET(_context: APIContext) {
     `- [Home](${SITE}/): Overview, featured projects, and work experience`,
     `- [About](${SITE}/about/): Career story from PwC audit and accounting lecturing to software development`,
     `- [Writing](${SITE}/blog/): Articles on data analysis, automation, and engineering`,
-    `- [Portfolio](${SITE}/projects/): Selected projects across SaaS, data pipelines, and finance systems`,
+    `- [Portfolio](${SITE}/portfolio/): Selected projects across SaaS, data pipelines, and finance systems`,
     '',
     '## Blog',
     '',
