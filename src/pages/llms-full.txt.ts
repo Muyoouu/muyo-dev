@@ -1,12 +1,13 @@
 import { getCollection } from 'astro:content'
 import type { APIContext } from 'astro'
+import { sortProjectsByOrder } from '../lib/projects'
 import { sortPostsDesc } from '../lib/writing'
 
 const SITE = 'https://muyo.dev'
 
 export async function GET(_context: APIContext) {
   const posts = sortPostsDesc(await getCollection('writing'))
-  const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order)
+  const projects = sortProjectsByOrder(await getCollection('projects'))
 
   const blogSections = posts.map((post) =>
     [

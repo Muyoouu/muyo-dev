@@ -5,23 +5,17 @@ import Header from '../components/Header.astro'
 import SpecCard from '../components/SpecCard.astro'
 import { profile } from '../data/profile'
 import BaseLayout from '../layouts/BaseLayout.astro'
+import { formatDate } from '../lib/format'
+import { sortProjectsByOrder } from '../lib/projects'
 import { sortPostsDesc } from '../lib/writing'
 
-const featuredProjects = (await getCollection('projects'))
-  .filter((project) => project.data.featured)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 3)
+const featuredProjects = sortProjectsByOrder(
+  (await getCollection('projects')).filter((project) => project.data.featured),
+).slice(0, 3)
 
 const latestPosts = sortPostsDesc(await getCollection('writing')).slice(0, 3)
 
 const { experience, certifications, socials } = profile
-
-const formatDate = (date: Date) =>
-  date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
 
 const ratings = [
   { param: 'Years in finance work', rating: '3' },
