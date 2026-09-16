@@ -1,8 +1,9 @@
 /*
  * Self-hosted fonts — woff2 only, latin subset only.
  * Single source of truth: every @font-face the site ships lives here.
- * Weight 500/700 and JetBrains Mono load on demand via unicode-range;
- * only Barlow 400/600 are preloaded (above-fold weights).
+ * Barlow 500, 700, and 400 italic, plus JetBrains Mono, load on demand. Each is
+ * its own latin-subset file, so a page fetches only the weights it uses.
+ * Only Barlow 400/600 are preloaded (above-fold weights).
  */
 
 /* Barlow — UI + body */
@@ -38,6 +39,15 @@
   src: url("@fontsource/barlow/files/barlow-latin-700-normal.woff2") format("woff2");
 }
 
+/* Barlow italic — blockquotes and `em` runs */
+@font-face {
+  font-family: "Barlow";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url("@fontsource/barlow/files/barlow-latin-400-italic.woff2") format("woff2");
+}
+
 /* JetBrains Mono — labels, dates, code */
 @font-face {
   font-family: "JetBrains Mono Variable";
@@ -49,13 +59,24 @@
 }
 
 /*
- * Metric-matched fallback for Barlow (Arial/Liberation Sans/Roboto).
- * Prevents FOUT layout shift while `font-display: swap` resolves:
- * line box (asc 100% / desc 20% / gap 0) and avg advance width
- * (size-adjust 98.85%) are tuned to Barlow's real font metrics.
+ * Metric-matched fallback for Barlow, normal and italic
+ * (Arial/Liberation Sans/Roboto). Prevents FOUT layout shift while
+ * `font-display: swap` resolves: line box (asc 100% / desc 20% / gap 0) and
+ * avg advance width (size-adjust 98.85%) are tuned to Barlow's real font metrics.
  */
 @font-face {
   font-family: "Barlow Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans"), local("Roboto");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+  size-adjust: 98.85%;
+}
+
+/* Italic counterpart, so an italic run never paints as a synthesized oblique of the fallback. */
+@font-face {
+  font-family: "Barlow Fallback";
+  font-style: italic;
   src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans"), local("Roboto");
   ascent-override: 100%;
   descent-override: 20%;
