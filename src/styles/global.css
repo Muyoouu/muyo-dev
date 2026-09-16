@@ -169,6 +169,21 @@
   overflow-wrap: break-word;
 }
 
+/*
+ * Blockquotes own their punctuation in the markdown, so the typography plugin's
+ * generated open-quote and close-quote would double it. The inner `p` also needs
+ * to inherit, because `prose-p:text-secondary` otherwise outranks the quote's
+ * own color.
+ */
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
+
+.prose blockquote p {
+  color: inherit;
+}
+
 @utility hero-display {
   font-size: clamp(2.5rem, 5.5vw, 4.75rem);
   line-height: 1.02;
