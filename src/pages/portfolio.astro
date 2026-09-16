@@ -11,7 +11,7 @@ const projects = sortProjectsByOrder(await getCollection('projects'))
 
 <BaseLayout
   title="Portfolio · Musa Yohanes"
-  description="Selected projects by Musa Yohanes, from SaaS platforms to finance automation and data work."
+  description="Case studies by Musa Yohanes across B2B data platforms, finance automation, and data analysis."
 >
   <Header />
   <main id="main" class="flex-1">
@@ -22,13 +22,27 @@ const projects = sortProjectsByOrder(await getCollection('projects'))
           <h1 class="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Catalog</h1>
         </div>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-secondary">
-          Every component I've shipped, oldest lessons included. The older case
-          studies stay as written: they show the path, not just where it ended.
-          Hover, focus, or tap the spec control to flip a package over.
+          Case studies, left as they were written. They show the path I took,
+          not the tidied-up version.
         </p>
-        <div class="mt-12 grid gap-6 md:grid-cols-2">
-          {projects.map((project) => <SpecCard project={project} />)}
-        </div>
+        {
+          projects.length > 0 && (
+            <div class="mt-12 grid gap-6 md:grid-cols-2">
+              {projects.map((project) => <SpecCard project={project} />)}
+            </div>
+          )
+        }
+        {
+          projects.length === 0 ? (
+            <p class="mt-12 border-y border-border py-7 text-secondary">
+              No case studies published yet.
+            </p>
+          ) : (
+            <p class="mt-6 font-mono text-xs leading-relaxed text-secondary">
+              Spec flips a card for its stack and role.
+            </p>
+          )
+        }
       </div>
     </section>
   </main>

@@ -1,6 +1,6 @@
 ---
 title: "Navigating OAuth2 Authentication in VBA"
-description: "A practical walkthrough of implementing OAuth2 authentication in VBA to connect Excel with the Xero API."
+description: "Getting OAuth2 working in VBA, where the language has no built-in support for it, to pull Xero data into Excel."
 pubDate: 2024-06-12
 url: "https://medium.com/@musayohanes00/navigating-oauth2-authentication-in-vba-3ba524c85171"
 tags: [oauth2, api, excel, xero, vba]

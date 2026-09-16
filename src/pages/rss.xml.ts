@@ -7,9 +7,9 @@ export async function GET(context: APIContext) {
   const posts = sortPostsDesc(await getCollection('writing'))
 
   return rss({
-    title: 'Musa Yohanes — Writing',
+    title: 'Musa Yohanes · Writing',
     description:
-      'Articles by Musa Yohanes on software development, data analysis, finance automation, and career change.',
+      'Articles by Musa Yohanes on data analysis, automation, and the move from finance into software.',
     site: context.site ?? 'https://muyo.dev',
     items: posts.map((post) => ({
       title: post.data.title,

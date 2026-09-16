@@ -1,6 +1,6 @@
 ---
 title: "Data Cleaning with SQL — Google's Capstone Project"
-description: "A step by step SQL walkthrough for cleaning a bike trip dataset, covering deduplication, standardization, and validation of real world data."
+description: "Cleaning 3.5 million bike trips in SQL: deduplication, standardization, and validation, with the queries alongside each step."
 pubDate: 2023-10-27
 url: "https://medium.com/@musayohanes00/data-cleaning-with-sql-googles-capstone-project-712420fbd1ad"
 tags: [google-data-analytics, data-cleaning, sql, data-validation]

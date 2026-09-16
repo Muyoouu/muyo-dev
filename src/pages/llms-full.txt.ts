@@ -42,7 +42,7 @@ export async function GET(_context: APIContext) {
   )
 
   const content = [
-    '# Musa Yohanes — Full Content',
+    '# Musa Yohanes · Full Content',
     '',
     '> Software developer in Jakarta. Builds data platforms for treasury teams at a SaaS company. Former financial auditor at PwC and accounting lecturer.',
     '',

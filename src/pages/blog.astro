@@ -11,7 +11,7 @@ const posts = sortPostsDesc(await getCollection('writing'))
 
 <BaseLayout
   title="Writing · Musa Yohanes"
-  description="Articles by Musa Yohanes on data analysis and automation, published on Medium."
+  description="Articles by Musa Yohanes on data analysis, automation, and the move from finance into software."
 >
   <Header />
   <main id="main" class="flex-1">
@@ -29,6 +29,11 @@ const posts = sortPostsDesc(await getCollection('writing'))
           stay here.
         </p>
         <ul class="mt-12 divide-y divide-border border-y border-border">
+          {
+            posts.length === 0 && (
+              <li class="py-7 text-secondary">No posts published yet.</li>
+            )
+          }
           {
             posts.map((post) => (
               <li>

@@ -1,6 +1,6 @@
 ---
 title: "How to Scrape and Analyze Instagram Engagements Data"
-description: "A walkthrough of scraping public Instagram engagement data with the Instagrapi library in Python and analyzing it to compare influencer performance."
+description: "Scraping public Instagram engagement data with Instagrapi in Python, then comparing influencer performance with confidence intervals."
 pubDate: 2023-11-15
 url: "https://medium.com/@musayohanes00/how-to-scrape-and-analyze-instagram-engagements-data-ae01197c652b"
 tags: [python, instagram, social-media-analytics, web-scraping, inferential-statistics]

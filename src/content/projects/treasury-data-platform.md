@@ -1,6 +1,6 @@
 ---
 title: "Treasury Data Platform"
-description: "A B2B data platform for treasury teams at Automation Boutique: Python pipelines that collect and clean treasury data, a React dashboard on top, MongoDB and Docker on Azure. I own the technical execution end to end, production deploys included."
+description: "A B2B data platform for treasury teams at Automation Boutique: Python pipelines that collect and clean treasury data, a React dashboard on top, MongoDB and Docker on Azure. I've owned most of the technical execution since the first commit, deploys and onboarding included."
 tags: ["Python", "React", "MongoDB", "Docker", "Azure"]
 featured: true
 order: 1

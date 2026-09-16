@@ -15,8 +15,8 @@ const socialLinks = [
 ---
 
 <BaseLayout
-  title="About · Musa Yohanes"
-  description={`About ${name}, ${role.toLowerCase()} in ${location}. Former financial auditor at PwC and accounting lecturer, now building data platforms for treasury teams.`}
+  title={`About · ${name}`}
+  description={`About ${name}, ${role.toLowerCase()} in ${location}. Formerly a PwC financial auditor and accounting lecturer, now building data platforms for treasury teams.`}
 >
   <Header />
   <main id="main" class="flex-1">
@@ -25,17 +25,15 @@ const socialLinks = [
         <div class="section-head">
           <span class="font-mono text-sm font-semibold text-accent">00</span>
           <h1 class="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            The operator
+            Background
           </h1>
         </div>
         <div class="mt-10 grid gap-12 md:grid-cols-3">
           <div class="md:col-span-2">
             <p class="text-lg leading-relaxed text-foreground md:text-xl">{summary}</p>
             <p class="mt-6 leading-relaxed text-secondary">
-              I'm in {location}, working remote for a Dutch SaaS company. I got
-              here through PwC audit rooms and accounting classrooms. That's
-              why the tools I build come with clear process and numbers you can
-              trust.
+              The habit that came with me is the audit trail: I want to know
+              where a number came from before I trust it.
             </p>
           </div>
           <aside class="space-y-6 text-sm">

@@ -45,7 +45,7 @@ export const profile: Profile = {
   tagline: 'Software Developer · Former Financial Auditor at PwC',
   location: 'Jakarta, Indonesia',
   summary:
-    'I build data platforms for treasury teams at a SaaS company. Before this I worked as a financial auditor at PwC and taught accounting, so I know the code side and the finance work it supports. I build tools people actually want to use.',
+    'I build data platforms for treasury teams at a SaaS company. I got here through PwC audit rooms and accounting classrooms, so I have done the work my software now automates.',
   skills: [
     'Python',
     'React',
