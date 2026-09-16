@@ -8,6 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 // and a version skew here would put two markdown pipelines in the build.
 import { satteri } from '@astrojs/markdown-satteri';
 import rehypeImageDimensions from './src/lib/rehype-image-dimensions.mjs';
+import datasheetLight from './src/lib/code-theme.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,10 +18,9 @@ export default defineConfig({
 
   markdown: {
     shikiConfig: {
-      themes: { light: 'github-light', dark: 'github-dark' },
+      themes: { light: datasheetLight, dark: 'github-dark-default' },
       defaultColor: false,
-      langAlias: { vba: 'vb' },
-      wrap: true
+      langAlias: { vba: 'vb' }
     },
     processor: satteri({
       hastPlugins: [rehypeImageDimensions]

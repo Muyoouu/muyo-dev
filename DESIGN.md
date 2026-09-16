@@ -63,6 +63,7 @@ One signal-red voice on white stock. No cream, no bone, no gradient anywhere in 
 - **`section-head` utility:** flex row, `border-top: 2px solid var(--color-foreground)`, 1rem padding-top; red mono index (e.g. `01`) + H2 (`text-2xl md:text-3xl`, weight 600, tracking-tight) + right-aligned `mono-label` link. Interior H1s use the same row at `text-3xl md:text-4xl`. Section numbering 00–04 is the sheet's wayfinding.
 - **Body:** 18px (`text-lg`) for statements and section intros; 15px for card descriptions and list decks; metadata 12px mono `tabular-nums` for every date/period.
 - **Prose** (`@tailwindcss/typography`, project/article pages): headings weight 600 tracking-tight ink; body secondary; links red, no underline → underline on hover; code on `bg-muted` chip; blockquote left border **2px red**, weight 400 italic ink, with its inner `p` forced to `inherit` (a `prose-p:` rule otherwise wins) and the plugin's generated `open-quote` / `close-quote` pseudo-elements suppressed, since the markdown carries its own punctuation; images and pre blocks `border-2 border-foreground`.
+- **Code blocks** (`src/lib/code-theme.mjs`, `global.css`): the panel surface is `--color-muted`, not the theme's own background, so it reads as a shaded cell on the white sheet instead of matching the page. Light mode uses a local shiki theme built from the sheet's ink, secondary, accent and accent-deep, plus two hues the sheet does not otherwise carry (blue `#1f5fa8` for strings, purple `#6b3fa0` for functions and types); dark mode uses `github-dark-default`. Every colour clears WCAG AA on its surface, which no bundled light theme manages: highlighted across all 68 fenced blocks, `github-light` puts one token at 3.49:1 and `github-dark` puts one at 3.05:1. `defaultColor: false` keeps the colours in CSS variables. `wrap` is off, so long lines scroll inside the block rather than reflowing, and the `pre` keeps `tabindex="0"` so the scroller stays keyboard reachable. A `@media print` rule pins the light palette, a white fill and an ink border whatever theme is active on screen; forced-colors needs no rule, because the `pre` border survives a forced palette on its own.
 - Numbers (dates, periods, ratings) are always `tabular-nums` — most sit in JetBrains Mono.
 
 ## Spacing & Layout
@@ -124,6 +125,7 @@ Casual first-person throughout, authored pages only: "I used to check the number
 - **Don't fabricate ratings or metrics.** Ratings-table entries must trace to the record (profile.ts, project content); the footnote is a binding promise, not a joke.
 - **Don't break the title-block constructions** — title-block rows, `section-head` indices 00–04, and the ruled-list pattern are the layout signature. The article end matter follows the same ruled logic: a 2px opener, cells inside it, 1px rules between them.
 - **Don't ship generated or stock rasters.** See Provenance.
+- **Don't let the code surface match the page.** Code panels fill with `--color-muted`; a white panel on white stock reads as boxed text, not a panel.
 
 ## Provenance
 

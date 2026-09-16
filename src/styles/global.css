@@ -144,18 +144,39 @@
 
 /*
  * Shiki dual themes (`defaultColor: false`) emit --shiki-light/--shiki-dark
- * variables only; these rules resolve them against the site theme toggle.
+ * colour variables, which these rules resolve against the site theme toggle.
+ * The panel surface comes from the sheet's shaded token rather than from either
+ * theme's own background, so the emitted `--shiki-*-bg` values go unused.
+ * Per-token backgrounds are off for the same reason: painting spans with the
+ * theme's background would show as a second panel colour, and no block on the
+ * site uses a diff or carriage-return scope that defines one.
  */
 .astro-code,
 .astro-code span {
   color: var(--shiki-light);
-  background-color: var(--shiki-light-bg);
+}
+
+.astro-code {
+  background-color: var(--color-muted);
 }
 
 [data-theme="dark"] .astro-code,
 [data-theme="dark"] .astro-code span {
   color: var(--shiki-dark);
-  background-color: var(--shiki-dark-bg);
+}
+
+/* Print the light palette on white stock whatever theme is active on screen. */
+@media print {
+  .astro-code,
+  .astro-code span {
+    /* biome-ignore lint/complexity/noImportantStyles: has to beat the higher-specificity [data-theme="dark"] colour rule */
+    color: var(--shiki-light) !important;
+  }
+
+  .astro-code {
+    background-color: #fff;
+    border-color: #14171c;
+  }
 }
 
 /* Keep the block-level code box on the pre's full width. */
