@@ -33,7 +33,7 @@
     "@astrojs/markdown-satteri": "0.4.1",
     "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.4",
-    "@biomejs/biome": "2.5.13",
+    "@biomejs/biome": "2.5.15",
     "@tailwindcss/typography": "0.5.20",
     "@typescript/native-preview": "7.0.0-dev.20260707.2",
     "image-size": "2.0.4",
