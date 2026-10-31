@@ -12,9 +12,18 @@ interface Props {
   publishedTime?: Date
   image?: string
   jsonLd?: Record<string, unknown> | Record<string, unknown>[]
+  markdown?: boolean
 }
 
-const { title, description, ogType = 'website', publishedTime, image, jsonLd } = Astro.props
+const {
+  title,
+  description,
+  ogType = 'website',
+  publishedTime,
+  image,
+  jsonLd,
+  markdown = true,
+} = Astro.props
 
 const site = Astro.site ?? new URL('https://muyo.dev')
 const canonicalURL = new URL(Astro.url.pathname, site)
@@ -67,6 +76,13 @@ const jsonLdBlocks = [personJsonLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
     <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
+    {markdown && (
+      <link
+        rel="alternate"
+        type="text/markdown"
+        href={new URL(`${Astro.url.pathname}index.md`, site).toString()}
+      />
+    )}
 
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1418" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />

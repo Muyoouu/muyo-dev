@@ -1,42 +1,30 @@
-# Regular search engines
-User-agent: *
-Allow: /
+# Search engines and AI answer engines: allowed.
+# AI training crawlers: disallowed.
+# Content Signals: https://contentsignals.org/
 
-# AI / LLM crawlers welcome
 User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
+Disallow: /
 
 User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-User
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
+Disallow: /
 
 User-agent: Google-Extended
-Allow: /
+Disallow: /
 
 User-agent: Applebot-Extended
-Allow: /
+Disallow: /
 
 User-agent: CCBot
-Allow: /
+Disallow: /
 
 User-agent: meta-externalagent
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 
 Sitemap: https://muyo.dev/sitemap-index.xml
